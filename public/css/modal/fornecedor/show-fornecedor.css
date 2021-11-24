@@ -1,0 +1,113 @@
+.form{
+    margin: 0 1rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin: .2rem 0;
+}
+
+.input input{
+    height: 33px;
+    outline: none;
+    padding: 0 .5rem;
+    border: 0.5px solid #9db9bb;
+    background-color: #f6f6f6;
+    border-radius: .4rem;
+    width: 100%;
+}
+
+/*  */
+
+.select {
+    display: flex;
+    flex-direction: column;
+    margin: .2rem 0;
+}
+
+.select input{
+    height: 33px;
+    outline: none;
+    padding: 0 .5rem;
+    border: 0.5px solid #9db9bb;
+    background-color: #f6f6f6;
+    border-radius: .4rem;
+    width: 100%;
+}
+
+.ddd-telefone {
+    display: flex;
+    flex-direction: row;
+    margin: .2rem 0;
+}
+.ddd-telefone .input-ddd {
+    width: 20%;
+}
+
+.ddd-telefone .input-telefone{
+    margin-left: 20px;
+    width: 90%;
+}
+
+
+.input-tel-cid-est{
+    display: flex;
+}
+
+.input-tel-cid-est .input-estado-fornecedor{
+    width: 70px;
+}
+
+.input-tel-cid-est .input-estado-fornecedor input{
+    text-align: center;
+}
+
+.input-tel-cid-est .input-telefone-fornecedor {
+    width: 19%;
+}
+
+.input-tel-cid-est .input-cidade-fornecedor {
+    width: 65%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.modal-footer{
+    margin: 1.5rem 1rem;
+    padding: 0;
+}
+
+.modal-footer button{
+    outline: none;
+    border: 0;
+    width: 120px;
+    height: 35px;
+    color: #fff;
+    border-radius: .3rem;
+}
+
+.modal-footer .close img{
+    width: 13px;
+    margin: 2px;
+}
+
+.modal-footer .submit img{
+    width: 17px;
+    margin: 2px;
+}
+
+.modal-footer .close{
+    background-color: #CD0000;
+    transition: opacity .3s;
+}
+
+.modal-footer .submit{
+    background-color: #00AC4F;
+    transition: opacity .3s;
+}
+
+.modal-footer .close:hover,
+.modal-footer .submit:hover{
+    opacity: 80%;
+}
