@@ -9,13 +9,13 @@
             <div class="title-text">
                 <span>
                     <a href="dashboard.index">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="../public/img/truck-icon.svg" alt="Fornecedor">
+                    <img src="{{ asset("img/truck-icon.svg")}}" alt="Fornecedor">
                     Fornecedores
                 </span>
             </div>
@@ -31,7 +31,7 @@
 
                 <button type="button" id="btn" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#fornecedorModal">
-                    <img src="../public/img/adicionar-item.svg" alt="Adicionar fornecedor">
+                    <img src="{{ asset("img/adicionar-item.svg")}}" alt="Adicionar fornecedor">
                     Cadastrar Fornecedor
                 </button>
                 
@@ -58,14 +58,14 @@
                                 <td>
                                     <a class="ver" style="cursor: pointer" title="Ver fornecedor" data-bs-toggle="modal"
                                     data-bs-target="#fornecedorModalShow">
-                                        <img src="../public/img/eye-icon.svg" alt="Ver fornecedor">
+                                        <img src="{{ asset("img/eye-icon.svg")}}" alt="Ver fornecedor">
                                     </a>
                                     <a class="edit" title="Editar fornecedor" style="cursor: pointer">
-                                        <img src="../public/img/pencil-icon.svg" data-bs-toggle="modal"
+                                        <img src="{{ asset("img/pencil-icon.svg")}}" data-bs-toggle="modal"
                                         data-bs-target="#fornecedorModalEdit" alt="Editar fornecedor">
                                     </a>
                                     <a  title="Exluir fornecedor" style="cursor: pointer">
-                                        <img src="../public/img/trash-icon.svg" alt="Excluir fornecedor">
+                                        <img src="{{ asset("img/trash-icon.svg")}}" alt="Excluir fornecedor">
                                     </a>
 
                                 </td>
