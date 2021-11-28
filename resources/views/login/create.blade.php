@@ -28,11 +28,11 @@
     <div id="container">
         <div class="landing-page">
             <div class="img-sistema">
-                <img src="../public/img/inv.png" alt="">
+                <img src="{{ asset("img/inv.png")}}" alt="">
                 <div class="mini-footer">
                     <p><strong>© SISCONVE</strong> - Todos os direitos reservados</p>
                     <a href="#" target="_blank" title="Acessar repositório no github">
-                        <img src="../public/img/github-logo.svg" alt="Repositório github">
+                        <img src="{{ asset("img/github-logo.svg")}}" alt="Repositório github">
                     </a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                             <div class="login">
                                 <label class="label-login" for="login">Usuário</label>
                                 <div class="input">
-                                    <img src="../public/img/icon-user.svg" alt="Usuário">
+                                    <img src="{{ asset("img/icon-user.svg")}}" alt="Usuário">
                                     <input type="email" name="email" autocomplete="off" maxlength="50"
                                         class="@error('email') is-invalid @enderror">
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="login">
                                 <label class="label-pw" for="password">Senha</label>
                                 <div class="input">
-                                    <img src="../public/img/icon-pw.svg" alt="Cadeado">
+                                    <img src="{{ asset("img/icon-pw.svg")}}" alt="Cadeado">
                                     <input type="password" name="senha" maxlength="50"
                                         class=" @error('senha') is-invalid @enderror">
                                 </div>

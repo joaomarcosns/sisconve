@@ -8,7 +8,7 @@
         <div class="title-content">
             <div class="title-text">
                 <span>
-                    <a href="#">
+                    <a href="dashboard.index">
                         <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
                         Dashboard
                     </a>

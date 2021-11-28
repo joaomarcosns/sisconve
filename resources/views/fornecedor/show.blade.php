@@ -7,7 +7,7 @@
                 <h5>Ver Fornecedor</h5>
                 <div class="modal-header d-block modal-header-add-items float-right">
                     <div class="close-modal">
-                        <img data-dismiss="modal" class="close" src="../public/img/block-icon-black.svg"
+                        <img data-dismiss="modal" class="close" src="{{ asset("img/block-icon-black.svg")}}"
                             alt="Fechar" data-bs-dismiss="modal">
                     </div>
                 </div>

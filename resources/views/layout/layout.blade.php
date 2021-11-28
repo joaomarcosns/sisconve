@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e386f7fbce.js"></script>
-    
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.material.min.js"></script>
 
@@ -72,7 +71,8 @@
                             <p>Configurações</p>
                         </div>
                     </a>
-                    <a href="#">
+
+                    <a href="{{route("login.destroy")}}">
                         <div class="item-menu">
                             <i class="fas fa-power-off"></i>
                             <p>Sair do sistema</p>

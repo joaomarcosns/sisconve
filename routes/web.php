@@ -25,6 +25,7 @@ Route::prefix("cliente")->group(function () {
     Route::get('/', [ClientesController::class, 'index'])->name('cliente.index');
     Route::get('/create', [ClientesController::class, 'create'])->name('cliente.create');
     Route::post('/store', [ClientesController::class, 'store'])->name('cliente.store');
+    Route::get('/show/{id}',[ClientesController::class, 'show'])->name('cliente.show');
     Route::get('/edit/{id}', [ClientesController::class, 'edit'])->name('cliente.edit');
     Route::post('/update/{id}', [ClientesController::class, 'update'])->name('cliente.update');
     Route::get('/destroy/{id}', [ClientesController::class, 'destroy'])->name('cliente.destroy');
