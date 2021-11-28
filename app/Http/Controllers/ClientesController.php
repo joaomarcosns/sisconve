@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\clienteRequest;
 use App\Models\Cliente;
 use App\Models\ContatosCliente;
 use App\Models\EnderecoCliente;
 use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
@@ -21,10 +23,12 @@ class ClientesController extends Controller
             return redirect()->route('login.create');
         }
 
-        $clientes = Cliente::join('contatos_clientes', 'clientes.id', '=', 'contatos_clientes.cliente_id')
-            ->select('clientes.*', 'contatos_clientes.celular', 'contatos_clientes.ddd')
-            ->where('clientes.ativo', '=', 1)
-            ->get();
+        $clientes = Cliente::all();
+
+        // Cliente::join('contatos_clientes', 'clientes.id', '=', 'contatos_clientes.cliente_id')
+        //     ->select('clientes.*', 'contatos_clientes.celular', 'contatos_clientes.ddd')
+        //     ->where('clientes.ativo', '=', 1)
+        //     ->get();
 
         return view('clientes.index', compact('clientes'));
     }
@@ -49,27 +53,12 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(clienteRequest $request)
     {
         //
         if (!ValidarLogin::verificaSessao()) {
             return redirect()->route('login.create');
         }
-
-        $request->validate([
-            'nome' => 'required|max:255',
-            'data_nacimento' => 'required|date',
-            'cpf' => 'required',
-            'cep' => 'required',
-            'email' => 'required|max:255',
-            'ddd' => 'required|max:2',
-            'telefone' => 'required',
-            'rua' => 'required|max:255',
-            'numero' => 'required|max:10',
-            'bairro' => 'required|max:255',
-            'cidade' => 'required|max:255',
-            'estado' => 'required|max:2',
-        ]);
 
         $clientes = new Cliente();
         $clientes->nome = $request->nome;
@@ -105,7 +94,22 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
+
+        $clientes = DB::select('SELECT clientes.* FROM clientes WHERE clientes.id = ? AND clientes.ativo = 1', [$id]);
+        $enderecos = DB::select('SELECT endereco_clientes.* FROM endereco_clientes WHERE endereco_clientes.cliente_id = ?', [$id]);
+        $contatos = DB::select('SELECT contatos_clientes.* FROM contatos_clientes WHERE contatos_clientes.cliente_id = ?', [$id]);
+        $dados = [
+            'clientes' => $clientes,
+            'enderecos' => $enderecos,
+            'contatos' => $contatos
+        ];
+        
+        // return dd($dados);
+        // return view('clientes.show', $dados);
+        return json_encode($dados);
     }
 
     /**
@@ -116,7 +120,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
     }
 
     /**
@@ -128,7 +134,9 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
     }
 
     /**
@@ -139,6 +147,8 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
     }
 }

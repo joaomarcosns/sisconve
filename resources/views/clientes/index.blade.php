@@ -6,14 +6,14 @@
         <div class="title-content">
             <div class="title-text">
                 <span>
-                    <a href="../DashboardController/dashboard">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                    <a href="{{route("dashboard.index")}}">
+                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="../public/img/people-icon.svg" alt="Clientes">
+                    <img src="{{ asset("img/people-icon.svg")}}" alt="Clientes">
                     Clientes
                 </span>
             </div>
@@ -24,10 +24,11 @@
 
                 <!-- include moda -->
                 @include('clientes.create')
+                @include('clientes.show')
                 <!-- include modal -->
 
                 <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-cliente-modal">
-                    <img src="../public/img/adicionar-item.svg" alt="Adicionar cliente">
+                    <img src="{{ asset("img/adicionar-item.svg")}}" alt="Adicionar cliente">
                     Cadastrar Cliente
                 </button>
 
@@ -42,7 +43,6 @@
                         <tr>
                             <th>#</th>
                             <th>Nome do Cliente</th>
-                            <th>Contato</th>
                             <th>CPF</th>
                             <th>Crédito</th>
                             <th>Debito</th>
@@ -52,22 +52,22 @@
                     <tbody>
                         @foreach ($clientes as $cliente)
                             <tr>
-                                <td>{{ $cliente->id }}</td>
+                                <td class="idCliente">{{ $cliente->id }}</td>
                                 <td>{{ $cliente->nome }}</td>
-                                <td>({{ $cliente->ddd }}) {{ $cliente->celular }}</td>
                                 <td>{{ $cliente->cpf }}</td>
                                 <td>R$ {{ $cliente->credito }}</td>
                                 <td>R$ {{ $cliente->debito }}</td>
                                 <td>
-                                    <button title="Ver cliente" onclick="">
-                                        <img src="../public/img/eye-icon.svg" alt="">
+                                    <button class="ver_cliente" title="Ver cliente" data-bs-toggle="modal"
+                                    data-bs-target="#show-cliente-modal" >
+                                        <img src="{{ asset("img/eye-icon.svg")}}" alt="">
                                     </button>
                                     <button title="Editar cliente" onclick="">
-                                        <img src="../public/img/pencil-icon.svg" alt="">
+                                        <img src="{{ asset("img/pencil-icon.svg")}}" alt="">
                                     </button>
 
                                     <button title="Exluir cliente">
-                                        <img src="../public/img/trash-icon.svg" alt="">
+                                        <img src="{{ asset("img/trash-icon.svg")}}" alt="">
                                     </button>
                                 </td>
                             </tr>

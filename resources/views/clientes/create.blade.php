@@ -7,7 +7,7 @@
                 <h5>Cadastrar cliente</h5>
                 <div class="modal-header d-block modal-header-add-items float-right">
                     <div class="close-modal">
-                        <img data-dismiss="modal" src="../public/img/block-icon-black.svg" alt="Fechar">
+                        <img data-dismiss="modal" src="{{ asset("img/block-icon-black.svg")}}" alt="Fechar">
                     </div>
                 </div>
             </div>
@@ -67,6 +67,7 @@
                                 class="form-control numero">
                         </div>
                     </div>
+                    {{--  --}}
                     <div class="input-bairro-cidade-estado">
                         <div class="input input-bairro" id="bairro">
                             <label for="bairro">Bairro</label>
@@ -83,14 +84,16 @@
                             <input type="text" maxlength="2" placeholder="SP" name="uf" class="form-control" disabled>
                         </div>
                     </div>
+                    
+                    {{--  --}}
                     <div class="modal-footer">
                         <button type="button" class="close" data-dismiss="modal">
                             Cancelar
-                            <img src="../public/img/block-icon.svg" alt="Cancelar">
+                            <img src="{{ asset("img/block-icon.svg")}}" alt="Cancelar">
                         </button>
                         <button type="submit" class="submit">
                             Cadastrar
-                            <img src="../public/img/check-icon.svg" alt="Cadastrar">
+                            <img src="{{ asset("img/check-icon.svg")}}" alt="Cadastrar">
                         </button>
                     </div>
                 </form>
