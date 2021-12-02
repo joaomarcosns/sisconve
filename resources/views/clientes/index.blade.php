@@ -6,14 +6,14 @@
         <div class="title-content">
             <div class="title-text">
                 <span>
-                    <a href="{{route("dashboard.index")}}">
-                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
+                    <a href="{{ route('dashboard.index') }}">
+                        <img src="{{ asset('img/dashboard-verde.svg') }}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="{{ asset("img/people-icon.svg")}}" alt="Clientes">
+                    <img src="{{ asset('img/people-icon.svg') }}" alt="Clientes">
                     Clientes
                 </span>
             </div>
@@ -25,10 +25,12 @@
                 <!-- include moda -->
                 @include('clientes.create')
                 @include('clientes.show')
+                @include('clientes.create-endereco')
+                @include('clientes.create-contatos')
                 <!-- include modal -->
 
                 <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-cliente-modal">
-                    <img src="{{ asset("img/adicionar-item.svg")}}" alt="Adicionar cliente">
+                    <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar cliente">
                     Cadastrar Cliente
                 </button>
 
@@ -59,15 +61,23 @@
                                 <td>R$ {{ $cliente->debito }}</td>
                                 <td>
                                     <button class="ver_cliente" title="Ver cliente" data-bs-toggle="modal"
-                                    data-bs-target="#show-cliente-modal" >
-                                        <img src="{{ asset("img/eye-icon.svg")}}" alt="">
+                                        data-bs-target="#show-cliente-modal">
+                                        <img src="{{ asset('img/eye-icon.svg') }}" alt="">
                                     </button>
                                     <button title="Editar cliente" onclick="">
-                                        <img src="{{ asset("img/pencil-icon.svg")}}" alt="">
+                                        <img src="{{ asset('img/pencil-icon.svg') }}" alt="">
                                     </button>
 
                                     <button title="Exluir cliente">
-                                        <img src="{{ asset("img/trash-icon.svg")}}" alt="">
+                                        <img src="{{ asset('img/trash-icon.svg') }}" alt="">
+                                    </button>
+                                    <button title="Adicionar Contatos" data-bs-toggle="modal"
+                                        data-bs-target="#create-contatos-modal" class="cadastro_contatos">
+                                        <img src="{{ asset('img/phone-plus-icon.svg') }}" alt="">
+                                    </button>
+                                    <button title="Adicionar Endreço" data-bs-toggle="modal"
+                                        data-bs-target="#create-endereco" class="cadastro_endereco">
+                                        <img src="{{ asset('img/map-plus-icon.svg') }}" alt="">
                                     </button>
                                 </td>
                             </tr>
@@ -79,4 +89,3 @@
         </div>
     </div>
 @endsection
-

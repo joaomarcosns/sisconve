@@ -22,6 +22,7 @@
     {{--  --}}
     <link rel="shortcut icon" href="{{asset('img/favicon.svg')}}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/box-center.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buy-products.css') }}">
     <link rel="stylesheet" href="{{ asset('css/content-box.css') }}">
