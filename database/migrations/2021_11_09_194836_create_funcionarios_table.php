@@ -21,8 +21,8 @@ class CreateFuncionariosTable extends Migration
             $table->string('endereco');
             $table->string('cargo');
             $table->decimal('salario');
-            $table->string('email')->unique();
-            $table->string('senha');
+            $table->string('email')->unique()->nullable();
+            $table->string('senha')->nullable();
             $table->boolean("ativo")->default(true);
             $table->tinyInteger('nivel_acesso')->default(3)->comment('1 - Admin, 2 - Caixa, 3 - Funcionário');
             $table->dateTime('ultimo_login')->nullable();

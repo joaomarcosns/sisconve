@@ -7,7 +7,7 @@
                 <h5>Cadastrar cliente</h5>
                 <div class="modal-header d-block modal-header-add-items float-right">
                     <div class="close-modal">
-                        <img data-dismiss="modal" src="{{ asset("img/block-icon-black.svg")}}" alt="Fechar">
+                        <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar">
                     </div>
                 </div>
             </div>
@@ -84,16 +84,16 @@
                             <input type="text" maxlength="2" placeholder="SP" name="uf" class="form-control" disabled>
                         </div>
                     </div>
-                    
+
                     {{--  --}}
                     <div class="modal-footer">
                         <button type="button" class="close" data-dismiss="modal">
                             Cancelar
-                            <img src="{{ asset("img/block-icon.svg")}}" alt="Cancelar">
+                            <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
                         </button>
                         <button type="submit" class="submit">
                             Cadastrar
-                            <img src="{{ asset("img/check-icon.svg")}}" alt="Cadastrar">
+                            <img src="{{ asset('img/check-icon.svg') }}" alt="Cadastrar">
                         </button>
                     </div>
                 </form>
@@ -121,6 +121,9 @@
                 $('#cidade>input').prop('disabled', true);
                 $('#estado>input').prop('disabled', true);
                 $('#submit').prop('disabled', true);
+
+                $('#btnSubmit').css("background-color", "#1C1C1C");
+                $('#btnClose').css("background-color", "#1C1C1C");
 
                 $(".form-error").each(function() {
                     $(this).remove();
@@ -154,28 +157,6 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        var tableClientes = $('#tableClientes>table>tbody');
-                        tableClientes.append(
-                            '<tr>' +
-                            `<td>${response.id}</td>` +
-                            `<td>${response.nome_fantasia}</td>` +
-                            `<td>${response.cnpj}</td>` +
-                            `<td>${response.tipo}</td>` +
-                            '<td>' +
-                            `<a href="./fornecedor/show/${response.id}" title="Ver fornecedor" onclick="">` +
-                            '<img src="../public/img/eye-icon.svg" alt="Ver fornecedor">' +
-                            '</a>' +
-                            '<button title="Editar fornecedor">' +
-                            '<img src="../public/img/pencil-icon.svg" data-toggle="modal"' +
-                            'data-target="#editar-fornecedor-modal" alt="Editar fornecedor">' +
-                            '</button>' +
-                            '<button title="Exluir fornecedor">' +
-                            '<img src="../public/img/trash-icon.svg" alt="Excluir fornecedor">' +
-                            '</button>' +
-                            '</td>' +
-                            '</tr>'
-                        );
-
                         $('#nome>input').prop('disabled', false);
                         $('#data_nacimento>input').prop('disabled', false);
                         $('#cpf>input').prop('disabled', false);
@@ -189,6 +170,10 @@
                         $('#cidade>input').prop('disabled', false);
                         $('#estado>input').prop('disabled', false);
                         $('#submit').prop('disabled', false);
+
+                        $('#btnSubmit').css("background-color", "#00AC4F");
+                        $('#btnClose').css("background-color", "#CD0000");
+                        location.reload(true);
                     },
                     error: function(response) {
                         const data = response.responseJSON;

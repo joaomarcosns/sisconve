@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
 use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class VendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +15,10 @@ class DashboardController extends Controller
     public function index()
     {
         if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
 
-        $clientes = DB::table('clientes')->count();
-
-        return view('dashboard.index', compact('clientes'));
+        return view('venda.index');
     }
 
     /**
@@ -34,9 +29,9 @@ class DashboardController extends Controller
     public function create()
     {
         if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
+        return view('venda.create');
     }
 
     /**
@@ -47,10 +42,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -61,10 +53,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -75,10 +64,7 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -90,10 +76,7 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -104,9 +87,6 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 }

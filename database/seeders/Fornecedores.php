@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Fornecedor;
 use Illuminate\Database\Seeder;
 
-class Fornecores extends Seeder
+class Fornecedores extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,6 @@ class Fornecores extends Seeder
      */
     public function run()
     {
-        
         $fornecedor = new Fornecedor();
         $fornecedor->nome_fantasia = "Adriana e Luzia Brinquedos Ltda";
         $fornecedor->cnpj = "19.332.921/0001-80";

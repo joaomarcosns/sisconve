@@ -17,10 +17,11 @@
     <script src="https://kit.fontawesome.com/e386f7fbce.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.material.min.js"></script>
+    <script src="{{ asset('js/toastNotify.js') }}"></script>
 
 
     {{--  --}}
-    <link rel="shortcut icon" href="{{asset('img/favicon.svg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.svg') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/box-center.css') }}">
@@ -32,13 +33,22 @@
     <link rel="stylesheet" href="{{ asset('css/sell-products.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toast.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/keyframes.css') }} ">
     {{-- Motal --}}
     <link rel="stylesheet" href="{{ asset('css/modal/modal.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/add-item.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/categoria/cadastro-categoria.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/cadastro-cliente.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/cadastro-cliente.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/cadastro-cliente.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/cadastro-fornecedor.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/modal/produto/cadastro-produto.css') }} ">
     {{--  --}}
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.material.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/4.0.0/material-components-web.min.css">
-    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/4.0.0/material-components-web.min.css">
+
 
 
     <title>SISCONVE - @yield('title')</title>
@@ -53,7 +63,7 @@
         <div class="user-area">
             <span id="date-time"></span>
             <img class="divisor" src="{{ asset('img/separador.svg') }}" alt="Separador">
-            <span class="username">{{session('funcionario')->nome_funcionario}}</span>
+            <span class="username">{{ session('funcionario')->nome_funcionario }}</span>
             <img class="user-img" src="{{ asset('img/default-user.svg') }}" alt="Usuário">
 
             <div class="dropdown show">
@@ -73,7 +83,7 @@
                         </div>
                     </a>
 
-                    <a href="{{route("login.destroy")}}">
+                    <a href="{{ route('login.destroy') }}">
                         <div class="item-menu">
                             <i class="fas fa-power-off"></i>
                             <p>Sair do sistema</p>
@@ -92,40 +102,45 @@
             <div class="sidebar">
                 <ul class="menu-items">
                     <li href="#" data-toggle="collapse" aria-expanded="false" class="dropdown">
-                        <a href="#"><img src="{{ asset('img/dashboard.svg') }}" alt="">Dashboard</a>
+                        <a href="{{ route('dashboard.index') }}"><img src="{{ asset('img/dashboard.svg') }}"
+                                alt="">Dashboard</a>
                     </li>
                     <li href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown">
-                        <a href="{{route('cliente.index')}}"><img src="{{ asset('img/clientes.svg') }}" alt="">Clientes</a>
+                        <a href="{{ route('cliente.index') }}"><img src="{{ asset('img/clientes.svg') }}"
+                                alt="">Clientes</a>
                     </li>
 
                     <li href="#pageSubmenuProdutos" data-toggle="collapse" aria-expanded="false" class="dropdown">
-                        <a href="#"><img src="{{ asset('img/produtos.svg') }}" alt="">Produtos</a>
+                        <a href="{{ route('produto.index') }}"><img src="{{ asset('img/produtos.svg') }}"
+                                alt="">Produtos</a>
                     </li>
 
                     <li href="#pageSubmenuCategorias" data-toggle="collapse" aria-expanded="false"
                         class="dropdown">
-                        <a href="#"><img src="{{ asset('img/categorias.svg') }}" alt="">Categorias</a>
+                        <a href="{{ route('categoria.index') }}"><img src="{{ asset('img/categorias.svg') }}"
+                                alt="">Categorias</a>
                     </li>
 
                     <li href="#pageSubmenuVendas" data-toggle="collapse" aria-expanded="false" class="dropdown">
                         <span><img src="{{ asset('img/vendas.svg') }}" alt="">Vendas</span>
                         <ul class="collapse list-unstyled" id="pageSubmenuVendas">
-                            <li><a href="#">Realizar venda</a></li>
-                            <li><a href="#">Ver vendas</a></li>
+                            <li><a href="{{route('venda.create')}}">Realizar venda</a></li>
+                            <li><a href="{{route('venda.index')}}">Ver vendas</a></li>
                         </ul>
                     </li>
 
                     <li href="#pageSubmenuCompras" data-toggle="collapse" aria-expanded="false" class="dropdown">
                         <span><img src="{{ asset('img/Compras.svg') }}" alt="">Compras</span>
                         <ul class="collapse list-unstyled" id="pageSubmenuCompras">
-                            <li><a href="#">Registrar compra</a></li>
-                            <li><a href="#">Ver compras</a></li>
+                            <li><a href="{{route('compra.create')}}">Registrar compra</a></li>
+                            <li><a href="{{route('compra.index')}}">Ver compras</a></li>
                         </ul>
                     </li>
 
                     <li href="#pageSubmenuFornecedor" data-toggle="collapse" aria-expanded="false"
                         class="dropdown">
-                        <a href="{{route("fornecedor.index")}}"><img src="{{ asset('img/fornecedor.svg') }}" alt="Fornecedor">Fornecedor</a>
+                        <a href="{{ route('fornecedor.index') }}"><img src="{{ asset('img/fornecedor.svg') }}"
+                                alt="Fornecedor">Fornecedor</a>
                     </li>
 
                     <li href="#pageSubmenuFornecedoa" data-toggle="collapse" aria-expanded="false"
@@ -133,7 +148,7 @@
                         <span><img src="{{ asset('img/financas.svg') }}" alt="">Finanças</span>
                         <ul class="collapse list-unstyled" id="pageSubmenuFornecedoa">
                             @if (session('funcionario')->nivel_acesso != 3)
-                            <li><a href="#">Ver caixas</a></li>
+                                <li><a href="{{route('caixa.index')}}">Ver caixas</a></li>
                             @endif
                             <li><a href="#">Cobranças</a></li>
                             <li><a href="#">Pagamentos</a></li>
@@ -142,10 +157,11 @@
 
 
                     @if (session('funcionario')->nivel_acesso == 1)
-                    <li href="#pageSubmenuFuncionarios" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown">
-                        <a href="#"><img src="{{ asset('img/funcionario.svg') }}" alt="Funcionários">Funcionários</a>
-                    </li>
+                        <li href="#pageSubmenuFuncionarios" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown">
+                            <a href="{{route('funcionario.index')}}"><img src="{{ asset('img/funcionario.svg') }}"
+                                    alt="Funcionários">Funcionários</a>
+                        </li>
                     @endif
 
                     <li href="#pageSubmenuRelatório" data-toggle="collapse" aria-expanded="false"
@@ -165,7 +181,7 @@
                 </ul>
             </div>
         </div>
-        <div class="content-center">
+        <div class="content-center" id="load">
             @yield('conteudo')
         </div>
 
@@ -173,19 +189,17 @@
     <script src="{{ asset('js/masks.js') }}"></script>
     <script>
         $(document).ready(function() {
-        $('#table-item').DataTable( {
-            language: {
-                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
-            },
-            autoWidth: false,
-            columnDefs: [
-                {
+            $('#table-item').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+                },
+                autoWidth: false,
+                columnDefs: [{
                     targets: ['_all'],
                     className: 'mdc-data-table__cell'
-                }
-            ]
-        } );
-    } );
+                }]
+            });
+        });
     </script>
     @yield('script')
 </body>

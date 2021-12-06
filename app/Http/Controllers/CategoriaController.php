@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\Http\Requests\CategoriaRequest;
+use App\Models\Categoria;
 use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +18,16 @@ class DashboardController extends Controller
     public function index()
     {
         if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
 
-        $clientes = DB::table('clientes')->count();
+        $categorias = DB::select('SELECT c.id, c.nome_categoria, sum(p.quantidade) as qunatidade_categoria FROM produtos p, categorias c 
+        WHERE p.categoria_id = c.id
+        AND c.ativo <> false
+        GROUP BY c.nome_categoria, c.id
+        ORDER BY c.id ASC');
 
-        return view('dashboard.index', compact('clientes'));
+        return view('categorias.index', compact('categorias'));
     }
 
     /**
@@ -34,9 +38,10 @@ class DashboardController extends Controller
     public function create()
     {
         if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
+
+        return view('categorias.create');
     }
 
     /**
@@ -45,12 +50,15 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
         if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
+
+        $categorias = Categoria::create($request->all());
+
+        return json_encode($categorias);
     }
 
     /**
@@ -65,6 +73,21 @@ class DashboardController extends Controller
             session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
+
+        if (isset($id)) {
+            if (preg_match('/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/', $id)) {
+                return json_encode(['error' => 'Fornecedor não encontrado']);
+            } else {
+
+                $categorias = Categoria::findOrFail($id);
+                if ($categorias == null) {
+                    return json_encode(['error' => 'Fornecedor não encontrado']);
+                }
+                return json_encode($categorias);
+            }
+        } else {
+            return json_encode(['error' => 'Não informado a chave de pesquisa']);
+        }
     }
 
     /**
@@ -75,10 +98,7 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -90,10 +110,7 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 
     /**
@@ -104,9 +121,6 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        if (!ValidarLogin::verificaSessao()) {
-            session()->flash('error', 'É nessesario fazer login');
-            return redirect()->route('login.create');
-        }
+        //
     }
 }
