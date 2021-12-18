@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\CaixaController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\LoginController;
-use App\Models\EnderecoCliente;
+use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\VendaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,4 +44,44 @@ Route::prefix('fornecedor')->group(function () {
     Route::get('/edit/{id}', [FornecedorController::class, 'edit'])->name('fornecedor.edit');
     Route::put('/update/{id}', [FornecedorController::class, 'update'])->name('fornecedor.update');
     Route::delete('/destroy/{id}', [FornecedorController::class, 'destroy'])->name('fornecedor.destroy'); 
+});
+
+Route::prefix('categoria')->group(function () {
+    Route::get('/', [CategoriaController::class, 'index'])->name('categoria.index');
+    Route::get('/create', [CategoriaController::class, 'create'])->name('categoria.create');
+    Route::post('/store', [CategoriaController::class, 'store'])->name('categoria.store');
+    Route::get('/show/{id}', [CategoriaController::class, 'show'])->name('categoria.show');
+    Route::get('/edit/{id}', [CategoriaController::class, 'edit'])->name('categoria.edit');
+    Route::put('/update/{id}', [CategoriaController::class, 'update'])->name('categoria.update');
+    Route::delete('/destroy/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy');
+});
+
+Route::prefix('produto')->group(function () {
+    Route::get('/', [ProdutosController::class, 'index'])->name('produto.index');
+    Route::get('/create', [ProdutosController::class, 'create'])->name('produto.create');
+    Route::post('/store', [ProdutosController::class, 'store'])->name('produto.store');
+    Route::get('/show/{id}', [ProdutosController::class, 'show'])->name('produto.show');
+    Route::get('/edit/{id}', [ProdutosController::class, 'edit'])->name('produto.edit');
+    Route::put('/update/{id}', [ProdutosController::class, 'update'])->name('produto.update');
+    Route::delete('/destroy/{id}', [ProdutosController::class, 'destroy'])->name('produto.destroy');
+});
+
+Route::prefix('venda')->group(function () {
+    Route::get('/', [VendaController::class, 'index'])->name('venda.index');
+    Route::get('/create', [VendaController::class, 'create'])->name('venda.create');
+});
+
+Route::prefix('compra')->group(function () {
+    Route::get('/', [CompraController::class, 'index'])->name('compra.index');
+    Route::get('/create', [CompraController::class, 'create'])->name('compra.create');
+});
+
+Route::prefix('funcionario')->group(function () {
+    Route::get('/', [FuncionarioController::class, 'index'])->name('funcionario.index');
+    Route::get('/create', [FuncionarioController::class, 'create'])->name('funcionario.create');
+});
+
+Route::prefix('caixa')->group(function () {
+    Route::get('/', [CaixaController::class, 'index'])->name('caixa.index');
+    Route::get('/create', [CaixaController::class, 'create'])->name('caixa.create');
 });

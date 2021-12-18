@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -18,7 +20,10 @@ class DashboardController extends Controller
             session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
-        return view('dashboard.index');
+
+        $clientes = DB::table('clientes')->count();
+
+        return view('dashboard.index', compact('clientes'));
     }
 
     /**

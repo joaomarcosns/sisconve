@@ -98,7 +98,7 @@
 }
 
 .section .section-title span{
-    color: #25767B;
+    color: #000;
     margin-left: 10px;
     font-weight: bold;
     font-size: 19px;
@@ -186,4 +186,17 @@
     font-size: 23px;
     margin-left: .3rem;
     margin-right: .3rem;
+}
+
+
+
+.grafico {
+    outline: none;
+    border: 0;
+    width: 120px;
+    height: 35px;
+    color: #fff;
+    border-radius: .3rem;
+    background-color: #25767b;
+    transition: opacity .3s;
 }

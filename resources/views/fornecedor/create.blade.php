@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/modal/cadastro-fornecedor.css') }} ">
+
 <form class="form-signin" autocomplete="off" name="formCadastarFornecedor" id="formCadastarFornecedor" method="POST"
     action="{{ route('fornecedor.store') }}">
     <div class="modal fade" id="fornecedorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -9,8 +9,14 @@
                     <h5>Cadastrar fornecedor</h5>
                     <div class="modal-header d-block modal-header-add-items float-right">
                         <div class="close-modal">
+<<<<<<< HEAD
                             <img data-dismiss="modal" src="{{ asset("img/block-icon-black.svg")}}" alt="Fechar"
                                 data-bs-dismiss="modal">
+=======
+                            <div class="close-modal">
+                                <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar">
+                            </div>
+>>>>>>> develop
                         </div>
                     </div>
                 </div>
@@ -86,13 +92,21 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnClose" class="close" data-bs-dismiss="modal">
+                    <button type="button" class="close" data-dismiss="modal">
                         Cancelar
+<<<<<<< HEAD
                         <img src="{{ asset("img/block-icon.svg")}}" alt="Cancelar">
+=======
+                        <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
+>>>>>>> develop
                     </button>
-                    <button type="submit" class="submit" id="btnSubmit">
+                    <button type="submit" class="submit">
                         Cadastrar
+<<<<<<< HEAD
                         <img src="{{ asset("img/check-icon.svg")}}" alt="Cadastrar">
+=======
+                        <img src="{{ asset('img/check-icon.svg') }}" alt="Cadastrar">
+>>>>>>> develop
                     </button>
                 </div>
             </div>
@@ -147,27 +161,27 @@
                 },
                 dataType: 'json',
                 success: (response) => {
-                    var tableFornecedores = $('#tableFornecedores>table>tbody');
-                    tableFornecedores.append(
-                        '<tr>' +
-                            `<td>${response.id}</td>` +
-                            `<td>${response.nome_fantasia}</td>` +
-                            `<td>${response.cnpj}</td>` +
-                            `<td>${response.tipo}</td>` +
-                            '<td>'+
-                                `<a href="./fornecedor/show/${response.id}" title="Ver fornecedor" onclick="">` +
-                                    '<img src="../public/img/eye-icon.svg" alt="Ver fornecedor">' +
-                                '</a>'+
-                                '<button title="Editar fornecedor">' +
-                                    '<img src="../public/img/pencil-icon.svg" data-toggle="modal"' +
-                                    'data-target="#editar-fornecedor-modal" alt="Editar fornecedor">' +
-                                '</button>' +
-                                '<button title="Exluir fornecedor">' +
-                                    '<img src="../public/img/trash-icon.svg" alt="Excluir fornecedor">' +
-                                '</button>'+
-                            '</td>' +
-                        '</tr>'
-                    );
+                    // var tableFornecedores = $('#tableFornecedores>table>tbody');
+                    // tableFornecedores.append(
+                    //     '<tr>' +
+                    //         `<td>${response.id}</td>` +
+                    //         `<td>${response.nome_fantasia}</td>` +
+                    //         `<td>${response.cnpj}</td>` +
+                    //         `<td>${response.tipo}</td>` +
+                    //         '<td>'+
+                    //             `<a href="./fornecedor/show/${response.id}" title="Ver fornecedor" onclick="">` +
+                    //                 '<img src="../public/img/eye-icon.svg" alt="Ver fornecedor">' +
+                    //             '</a>'+
+                    //             '<button title="Editar fornecedor">' +
+                    //                 '<img src="../public/img/pencil-icon.svg" data-toggle="modal"' +
+                    //                 'data-target="#editar-fornecedor-modal" alt="Editar fornecedor">' +
+                    //             '</button>' +
+                    //             '<button title="Exluir fornecedor">' +
+                    //                 '<img src="../public/img/trash-icon.svg" alt="Excluir fornecedor">' +
+                    //             '</button>'+
+                    //         '</td>' +
+                    //     '</tr>'
+                    // );
                     $('#btnSubmit').prop('disabled', false);
                     $('#btnClose').prop('disabled', false);
 
@@ -181,9 +195,9 @@
                     $('#numero>input').prop('disabled', false);
                     $('#cidade>input').prop('disabled', false);
                     $('#uf>input').prop('disabled', false);
-
                     $('#btnSubmit').css("background-color", "#00AC4F");
                     $('#btnClose').css("background-color", "#CD0000");
+                    location.reload(true);
 
                 },
                 error: (response) => {
