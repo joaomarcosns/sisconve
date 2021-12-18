@@ -9,13 +9,13 @@
             <div class="title-text">
                 <span>
                     <a href="{{route('dashboard.index')}}">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="../public/img/cash-register.svg" alt="Caixa">
+                    <img src="{{ asset("img/cash-register.svg")}}" alt="Caixa">
                     Caixa
                 </span>
             </div>
@@ -52,14 +52,14 @@
                             <td></td>
                             <td>
                                 <button title="Ver caixa" onclick="">
-                                    <img src="../public/img/eye-icon.svg" alt="Ver caixa">
+                                    <img src="{{ asset("img/eye-icon.svg")}}" alt="Ver caixa">
                                 </button>
                                 <button title="Editar caixa">
-                                    <img src="../public/img/pencil-icon.svg" data-toggle="modal"
+                                    <img src="{{ asset("img/pencil-icon.svg")}}" data-toggle="modal"
                                         data-target="#editar-caixa-modal" alt="Editar caixa">
                                 </button>
                                 <button title="Exluir caixa">
-                                    <img src="../public/img/trash-icon.svg" alt="Excluir caixa">
+                                    <img src="{{ asset("img/trash-icon.svg")}}" alt="Excluir caixa">
                                 </button>
                             </td>
                         </tr>
