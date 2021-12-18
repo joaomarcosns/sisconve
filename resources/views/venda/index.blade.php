@@ -7,13 +7,13 @@
             <div class="title-text">
                 <span>
                     <a href="{{route('dashboard.index')}}">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="../public/img/car-compra.svg" alt="Vendas">
+                    <img src="{{ asset("img/car-compra.svg")}}" alt="Vendas">
                     Vendas
                 </span>
                 <span>/</span>
@@ -43,13 +43,13 @@
                             <td></td>
                             <td>
                                 <a title="Ver venda" href="#">
-                                    <img src="../public/img/eye-icon.svg" alt="">
+                                    <img src="{{ asset("img/eye-icon.svg")}}" alt="">
                                 </a>
                                 <a title="Editar venda" href="#">
-                                    <img src="../public/img/pencil-icon.svg" alt="">
+                                    <img src="{{ asset("img/pencil-icon.svg")}}" alt="">
                                 </a>
                                 <a title="Exluir venda" href="#">
-                                    <img src="../public/img/trash-icon.svg" alt="">
+                                    <img src="{{ asset("img/trash-icon.svg")}}" alt="">
                                 </a>
                             </td>
                         </tr>

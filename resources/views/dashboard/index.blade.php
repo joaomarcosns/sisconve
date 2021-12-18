@@ -17,7 +17,7 @@
                 <div class="content">
                     <div class="section">
                         <div class="section-title">
-                            <span><img src="../public/img/chart-icon.svg" alt="">Números</span>
+                            <span><img src="{{ asset("img/chart-icon.svg")}}" alt="">Números</span>
                         </div>
                         <div class="section-card">
                             <div class="card" style="background-color: #00A3FF !important;">
@@ -55,7 +55,7 @@
                     <div class="section">
                         <div class="section-title d-flex justify-content-between">
                             <span>
-                                <img src="../public/img/probaixoestoque-btn.svg" alt="">Produtos com baixa no
+                                <img src="{{ asset("img/probaixoestoque-btn.svg")}}" alt="">Produtos com baixa no
                                 Estoque
                             </span>
                             <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-cliente-modal"
@@ -95,7 +95,7 @@
                     <!-- clientes que devem... -->
                     <div class="section">
                         <div class="section-title">
-                            <span><img src="../public/img/cliParcleasVencendo.svg" alt="">Clientes com parcelas
+                            <span><img src="{{ asset("img/cliParcleasVencendo.svg")}}" alt="">Clientes com parcelas
                                 vencendo</span>
                         </div>
                         <table>

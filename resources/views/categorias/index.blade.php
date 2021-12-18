@@ -9,7 +9,7 @@
             <div class="title-text">
                 <span>
                     <a href="{{ route('dashboard.index') }}">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
