@@ -22,10 +22,6 @@
 
         <div class="item-area">
             <div class="manage-item-top">
-                <div class="search-item">
-                    <input id="search" type="text" placeholder="Procure por um produto">
-                    <img src="{{ asset('img/search-icon.svg') }}" alt="">
-                </div>
 
                 <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-produto-modal">
                     <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar produto">

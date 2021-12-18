@@ -21,23 +21,17 @@
 
         <div class="item-area">
             <div class="manage-item-top">
-
-                <!-- include moda -->
-                @include('clientes.create')
-                @include('clientes.show')
-                @include('clientes.create-endereco')
-                @include('clientes.create-contatos')
-                <!-- include modal -->
-
                 <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-cliente-modal">
                     <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar cliente">
                     Cadastrar Cliente
                 </button>
-
-                <!-- modal cadastro de cliente -->
-                {{-- include './../app/include/modal/cadastrar-cliente-modal.php'; ?> --}}
-
             </div>
+            <!-- include moda -->
+            @include('clientes.create')
+            @include('clientes.show')
+            @include('clientes.create-endereco')
+            @include('clientes.create-contatos')
+            <!-- include modal -->
 
             <div class="table-item-area" id="tableClientes">
                 <table id="table-item" class="mdl-data-table">

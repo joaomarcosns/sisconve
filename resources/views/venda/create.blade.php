@@ -7,13 +7,13 @@
             <div class="title-text">
                 <span>
                     <a href="{{ route('dashboard.index') }}">
-                        <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                        <img src="{{ asset('img/dashboard-verde.svg') }}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="../public/img/car-compra.svg" alt="Realizar venda">
+                    <img src="{{ asset('img/car-compra.svg') }}" alt="Realizar venda">
                     Venda
                 </span>
                 <span>/</span>
@@ -48,7 +48,7 @@
                     <div class="sell-info">
                         <div class="client">
                             <button type="button" id="btn" data-toggle="modal" data-target="#client-modal">
-                                <img src="../public/img/Selecionar-Cliente.svg" alt="Cliente">
+                                <img src="{{ asset('img/Selecionar-Cliente.svg') }}" alt="Cliente">
                                 Cliente
                             </button>
                             <div class="data-sell-info">
@@ -63,7 +63,7 @@
                                         <div class="modal-header float-right">
                                             <h5>Cliente</h5>
                                             <div class="close-modal">
-                                                <img data-dismiss="modal" src="../public/img/block-icon-black.svg"
+                                                <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}"
                                                     alt="Fechar">
                                             </div>
                                         </div>
@@ -77,7 +77,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="confirm" data-dismiss="modal">
-                                                <img src="../public/img/check-icon.svg" alt="Confirmar">
+                                                <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                             </button>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                         <div class="payment">
                             <button type="button" id="btn" onclick="metPagamento()" data-toggle="modal"
                                 data-target="#payment-modal">
-                                <img src="../public/img/Meio-Pagamento.svg" alt="Metodo de Pagamento">
+                                <img src="{{ asset('img/Meio-Pagamento.svg')}}" alt="Metodo de Pagamento">
                                 Pagamento
                             </button>
                             <div class="data-sell-info">
@@ -104,7 +104,7 @@
                                         <div class="modal-header float-right">
                                             <h5>Método de Pagamento</h5>
                                             <div class="close-modal">
-                                                <img data-dismiss="modal" src="../public/img/block-icon-black.svg"
+                                                <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}"
                                                     alt="Fechar">
                                             </div>
                                         </div>
@@ -127,7 +127,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="confirm" data-dismiss="modal">
-                                                <img src="../public/img/check-icon.svg" alt="Confirmar">
+                                                <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                             </button>
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@
                         </div>
                         <div class="add-product">
                             <button type="button" id="btn-add-item" data-toggle="modal" data-target="#add-item-modal">
-                                <img src="../public/img/adicionar-item.svg" alt="Adicionar Item">
+                                <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar Item">
                                 Adicionar Item
                             </button>
 
@@ -150,7 +150,7 @@
                                         <div class="modal-header float-right">
                                             <h5>Adicionar um item a venda</h5>
                                             <div class="close-modal">
-                                                <img data-dismiss="modal" src="../public/img/block-icon-black.svg"
+                                                <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}"
                                                     alt="Fechar">
                                             </div>
                                         </div>
@@ -173,12 +173,12 @@
                                             <button type="button" class="exit-add" data-dismiss="modal"
                                                 class="cancel btn-modal">
                                                 Cancelar
-                                                <img src="../public/img/block-icon.svg" alt="Cancelar">
+                                                <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
                                             </button>
                                             <button type="button" class="confirm-add" id="btn-add-item-modal"
                                                 data-dismiss="modal" class="confirm btn-modal">
                                                 Adicionar
-                                                <img src="../public/img/check-icon.svg" alt="Confirmar">
+                                                <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                             </button>
                                         </div>
                                     </div>
@@ -198,11 +198,11 @@
                 <div class="buttons">
                     <button type="button" id="cancelar-venda" class="cancel">
                         <span>Cancelar Venda</span>
-                        <img src="../public/img/block-icon.svg" alt="Cancelar venda">
+                        <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar venda">
                     </button>
                     <button type="submit" id="finalizar-venda" class="accept">
                         <span>Finalizar Venda</span>
-                        <img src="../public/img/check-icon.svg" alt="Finalizar venda">
+                        <img src="{{ asset('img/check-icon.svg') }}" alt="Finalizar venda">
                     </button>
                 </div>
             </div>
@@ -266,7 +266,7 @@
                     </td>
                     <td>
                         <button title="Remover item" onclick="removeRow(this)">
-                            <img src="../public/img/lixeira-btn.svg" alt="Remover Produto">
+                            <img src="{{ asset('img/lixeira-btn.svg') }}" alt="Remover Produto">
                         </button>
                     </td>
                 </tr>

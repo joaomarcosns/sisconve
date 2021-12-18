@@ -21,10 +21,6 @@
 
         <div class="item-area">
             <div class="manage-item-top">
-                <div class="search-item">
-                    <input id="search" onkeyup="search()" type="text" placeholder="Procure por uma compra">
-                    <img src="../public/img/search-icon.svg" alt="Search">
-                </div>
             </div>
 
             <div class="table-item-area">

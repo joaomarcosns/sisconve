@@ -1,55 +1,18 @@
 @extends('layout.layout')
 
 @section('title', 'Dashboard')
-
-
 @section('conteudo')
     <div class="dashboard">
         <div class="title-content">
             <div class="title-text">
                 <span>
-                    <img src="../public/img/dashboard-verde.svg" alt="Dashboard">
+                    <img src="{{ asset('img/dashboard-verde.svg') }}" alt="Dashboard">
                     Dashboard
                 </span>
                 <span>/</span>
             </div>
         </div>
         <div class="main-page">
-            <div class="dash-btns">
-                <a href="{{route('cliente.index')}}" style="background-color: #31736F;"
-                    class="button">
-                    <span><img src="../public/img/clientes-btn.svg" alt="">Clientes</span>
-                </a>
-                <a href="{{route('produto.index')}}" style="background-color: #A50000;"
-                    class="button">
-                    <span><img src="../public/img/produtos-btn.svg" alt="">Produtos</span>
-                </a>
-                <a href="{{route('categoria.index')}}" style="background-color: #A1A500;"
-                    class="button">
-                    <span><img src="../public/img/categorias-btn.svg" alt="">Categorias</span>
-                </a>
-                <a href="#" style="background-color: #890765;" class="button">
-                    <span><img src="../public/img/vendas-btn.svg" alt="">Vendas</span>
-                </a>
-                <a href="#" style="background-color: #00FF66;"
-                    class="button">
-                    <span><img src="../public/img/compas-btn.svg" alt="">Compras</span>
-                </a>
-                <a href="{{route('fornecedor.index')}}" style="background-color: #00A3FF;"
-                    class="button">
-                    <span><img src="../public/img/fornecedor-btn.svg" alt="">Fornecedor</span>
-                </a>
-                {{-- ($_SESSION["FUNCIONARIO_NIVEL_ACESSO"] == 1) : --}}
-                <a href="{{route('funcionario.index')}}" style="background-color: #FF0099;"
-                    class="button">
-                    <span><img src="../public/img/funcionario.svg" alt="">Funcionário</span>
-                </a>
-                {{-- endif; ?> --}}
-                <a href="#" style="background-color: #47948F;" class="button">
-                    <span><img src="../public/img/financas-btn.svg" alt="">Finanças</span>
-                </a>
-            </div>
-
             <div class="content-dashboard">
                 <div class="content">
                     <div class="section">
@@ -90,9 +53,16 @@
                     </div>
                     <!-- Produtos que tem baixa no estoque... -->
                     <div class="section">
-                        <div class="section-title">
-                            <span><img src="../public/img/probaixoestoque-btn.svg" alt="">Produtos com baixa no
-                                Estoque</span>
+                        <div class="section-title d-flex justify-content-between">
+                            <span>
+                                <img src="../public/img/probaixoestoque-btn.svg" alt="">Produtos com baixa no
+                                Estoque
+                            </span>
+                            <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-cliente-modal"
+                                class="grafico">
+                                <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar cliente">
+                                Grafico
+                            </button>
                         </div>
                         <table>
                             <thead>
@@ -109,10 +79,17 @@
                                     <td></td>
                                     <td></td>
                                     <td>R$ </td>
-                                    <td><</td>
+                                    <td>
+                                        < </td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        {{-- grafico --}}
+                        <div id="curve_chart" style="display: none; width: 900px; height: 500px">
+                            oi
+                        </div>
+                        {{--  --}}
                     </div>
 
                     <!-- clientes que devem... -->
@@ -144,4 +121,22 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        var count = 0;
+        $(document).ready(function() {
+            $('.grafico').click(function() {
+                if (count == 0) {
+                    $('#curve_chart').show();
+                    count = 1;
+                } else {
+                    $('#curve_chart').hide();
+                    count = 0;
+                }
+            });
+        });
+    </script>
 @endsection

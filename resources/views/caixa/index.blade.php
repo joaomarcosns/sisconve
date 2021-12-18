@@ -24,7 +24,8 @@
         <div class="item-area">
             <div class="manage-item-top">
                 <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-caixa-modal">
-                    <img src="../public/img/adicionar-item.svg" alt="Adicionar caixa">
+                    
+                    <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar caixa">
                     Adicionar Caixa
                 </button>
 
