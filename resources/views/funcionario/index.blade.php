@@ -60,7 +60,7 @@
                                     <img src="{{ asset("img/eye-icon.svg")}}" alt="Ver funcionario">
                                 </button>
                                 <button title="Editar funcionario">
-                                    <img src="{{ asset("img/pencil-icon.svg" data-toggle="modal"
+                                    <img src="{{ asset("img/pencil-icon.svg")}}" data-toggle="modal"
                                         data-target="#editar-funcionario-modal")}}" alt="Editar funcionario">
                                 </button>
                                 <button title="Exluir funcionario">
