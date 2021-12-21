@@ -58,7 +58,7 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="#">SISCONVE</a>
+            <a href="{{ route('dashboard.index') }}">SISCONVE</a>
         </div>
         <div class="user-area">
             <span id="date-time"></span>
@@ -163,11 +163,6 @@
                                     alt="Funcionários">Funcionários</a>
                         </li>
                     @endif
-
-                    <li href="#pageSubmenuRelatório" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown">
-                        <span><img src="{{ asset('img/relatorios.svg') }}" alt="">Relatório</span>
-                    </li>
                 </ul>
                 <ul class="footer-sidebar dropdown">
                     <div class="text-center">

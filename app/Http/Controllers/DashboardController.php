@@ -20,10 +20,14 @@ class DashboardController extends Controller
             session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
-
         $clientes = DB::table('clientes')->count();
+        
+        $produtosAbaixoEstoque = DB::select("SELECT p.id, p.nome_produto, p.preco_venda, p.quantidade,c.nome_categoria from produtos p, categorias c
+        where c.id = p.categoria_id
+        and p.quantidade <= 10
+        ");
 
-        return view('dashboard.index', compact('clientes'));
+        return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque'));
     }
 
     /**
@@ -108,5 +112,28 @@ class DashboardController extends Controller
             session()->flash('error', 'É nessesario fazer login');
             return redirect()->route('login.create');
         }
+    }
+
+    public function graficoUm() {
+        if (!ValidarLogin::verificaSessao()) {
+            session()->flash('error', 'É nessesario fazer login');
+            return redirect()->route('login.create');
+        }
+
+        $nome = [];
+        $quantidade = [];
+        $cor = [];
+
+        $produto = DB::table('produtos')->select("nome_produto", "quantidade")->where('quantidade', '<=',"10")->get();
+
+        foreach ($produto as $produtos) {
+            $nome[] = $produtos->nome_produto;
+            $quantidade[] = $produtos->quantidade;
+            $cor[] = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+        }
+
+        // $clientes = DB::table('clientes')->count();
+
+        return json_encode(compact("nome", "quantidade", "cor"));
     }
 }
