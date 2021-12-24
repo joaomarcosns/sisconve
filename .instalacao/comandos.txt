@@ -1,4 +1,5 @@
 php artisan migrate
+php artisan db:seed --class=CaixaSeeder
 php artisan db:seed --class=funcionarios
 php artisan db:seed --class=Fornecedores
 php artisan db:seed --class=Clientes

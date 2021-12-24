@@ -1,37 +1,28 @@
-
-<form class="form-signin" autocomplete="off" name="formCadastarFornecedor" id="formCadastarFornecedor" method="POST"
-    action="{{ route('fornecedor.store') }}">
-    <div class="modal fade" id="fornecedorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header float-right">
-                    <h5>Cadastrar fornecedor</h5>
-                    <div class="modal-header d-block modal-header-add-items float-right">
-                        <div class="close-modal">
-<<<<<<< HEAD
-                            <img data-dismiss="modal" src="{{ asset("img/block-icon-black.svg")}}" alt="Fechar"
-                                data-bs-dismiss="modal">
-=======
-                            <div class="close-modal">
-                                <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar">
-                            </div>
->>>>>>> develop
-                        </div>
+<link rel="stylesheet" href="{{ asset('css/modal/fornecedor/show-fornecedor.css') }} ">
+<div class="modal fade" id="fornecedorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header float-right">
+                <h5>Casdastar Fornecedor</h5>
+                <div class="modal-header d-block modal-header-add-items float-right">
+                    <div class="close-modal">
+                        <img data-dismiss="modal" class="close" src="{{ asset('img/block-icon-black.svg') }}"
+                            alt="Fechar" data-bs-dismiss="modal">
                     </div>
                 </div>
-                <div class="form">
+            </div>
+            <div class="form">
+                <form class="form-signin" autocomplete="off" name="formCadastarFornecedor"
+                    id="formCadastarFornecedor">
                     {{-- nome_fantasia --}}
-                    <div class="input" id="nome_fantasia">
+                    <div class="input" id="nome_fantasia_show">
                         <label for="nome">Nome do fornecedor *</label>
-                        <input type="text" name="nome_fantasia" placeholder="Brinquedos LTDA" maxlength="100"
-                            class="form-control">
+                        <input type="text" name="nome_fantasia" class="form-control">
                     </div>
                     {{-- CNPJ --}}
-                    <div class="input" id="cnpj">
+                    <div class="input" id="cnpj_show">
                         <label for="cnpj">CNPJ *</label>
-                        <input type="text" name="cnpj" placeholder="00.000.000/0000-00" maxlength="100"
-                            class="form-control cnpj">
+                        <input type="text" name="cnpj" class="form-control cnpj">
                     </div>
                     {{-- Tipo --}}
                     <div class="select" id="tipo">
@@ -44,92 +35,79 @@
                     </div>
 
                     <div class="ddd-telefone">
-                        <div class="input input-ddd" id="ddd">
+                        <div class="input input-ddd" id="ddd_show">
                             <label for="telefone">DDD *</label>
-                            <input type="text" name="ddd" placeholder="11" maxlength="2" class="form-control ddd">
+                            <input type="text" name="ddd" class="form-control ddd">
                         </div>
-                        <div class="input input-telefone" id="telefone">
+                        <div class="input input-telefone" id="telefone_show">
                             <label for="telefone">Telefone *</label>
-                            <input type="text" name="telefone" placeholder="9 1234-5678" maxlength="9"
-                                class="form-control phone">
+                            <input type="text" name="telefone" class="form-control phone">
                         </div>
                     </div>
                     {{-- email --}}
 
-                    <div class="input input-telefone-fornecedor" id="email">
+                    <div class="input input-telefone-fornecedor" id="email_show">
                         <label for="email">Email *</label>
-                        <input type="email" name="email" placeholder="email@email" maxlength="50"
-                            class="form-control">
+                        <input type="email" name="email" placeholder="email@email" class="form-control">
                     </div>
 
                     {{-- Endereço --}}
 
-                    <div class="input" id="endereco">
+                    <div class="input" id="endereco_show">
                         <label for="endereco">Endereço *</label>
-                        <input type="text" name="endereco" placeholder="Rua x" maxlength="50" class="form-control">
+                        <input type="text" name="endereco" placeholder="Rua x" class="form-control">
                     </div>
 
                     {{-- Numero --}}
 
                     <div class="input-tel-cid-est">
-                        <div class="input input-telefone-fornecedor" id="numero">
+                        <div class="input input-telefone-fornecedor" id="numero_show">
                             <label for="numero">Numero *</label>
-                            <input type="text" name="numero" placeholder="20" maxlength="50" class="form-control numero">
+                            <input type="text" name="numero" placeholder="20" class="form-control numero">
                         </div>
                         {{-- Cidade --}}
-
-                        <div class="input input-cidade-fornecedor" id="cidade">
+                        <div class="input input-cidade-fornecedor" id="cidade_show">
                             <label for="cidade">Cidade *</label>
-                            <input type="text" name="cidade" placeholder="Igaporã" maxlength="30"
-                                class="form-control">
+                            <input type="text" name="cidade" placeholder="Igaporã" class="form-control">
                         </div>
                         {{-- Estado --}}
-
-                        <div class="input input-estado-fornecedor" id="uf">
+                        <div class="input input-estado-fornecedor mb-5" id="uf_show">
                             <label for="uf">Estado *</label>
-                            <input type="text" name="uf" placeholder="MG" maxlength="2" class="form-control uf">
+                            <input type="text" name="uf" placeholder="MG" class="form-control uf">
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close" data-dismiss="modal">
-                        Cancelar
-<<<<<<< HEAD
-                        <img src="{{ asset("img/block-icon.svg")}}" alt="Cancelar">
-=======
-                        <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
->>>>>>> develop
-                    </button>
-                    <button type="submit" class="submit">
-                        Cadastrar
-<<<<<<< HEAD
-                        <img src="{{ asset("img/check-icon.svg")}}" alt="Cadastrar">
-=======
-                        <img src="{{ asset('img/check-icon.svg') }}" alt="Cadastrar">
->>>>>>> develop
-                    </button>
-                </div>
+                    <div class="modal-footer">
+                        <button class="close btnClose" data-bs-dismiss="modal">
+                            Cancelar
+                            <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
+                        </button>
+                        <button type="submit" class="submit btnSubmit">
+                            Cadastrar
+                            <img src="{{ asset('img/check-icon.svg') }}" alt="Cadastrar">
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 
 <script>
     $(() => {
         $('#formCadastarFornecedor').submit((event) => {
-            $('#btnSubmit>input').prop('disabled', true);
-            $('#btnClose>input').prop('disabled', true);
-            $('#nome_fantasia>input').prop('disabled', true);
-            $('#cnpj>input').prop('disabled', true);
-            $('#tipo>select').prop('disabled', true);
-            $('#ddd>input').prop('disabled', true);
-            $('#telefone>input').prop('disabled', true);
-            $('#email>input').prop('disabled', true);
-            $('#endereco>input').prop('disabled', true);
-            $('#numero>input').prop('disabled', true);
-            $('#cidade>input').prop('disabled', true);
-            $('#uf>input').prop('disabled', true);
+            $('#btnSubmit_show>input').prop('disabled', true);
+            $('#btnClose_show>input').prop('disabled', true);
+            $('#nome_fantasia_show>input').prop('disabled', true);
+            $('#cnpj_show>input').prop('disabled', true);
+            $('#tipo_show>select').prop('disabled', true);
+            $('#ddd_show>input').prop('disabled', true);
+            $('#telefone_show>input').prop('disabled', true);
+            $('#email_show>input').prop('disabled', true);
+            $('#endereco_show>input').prop('disabled', true);
+            $('#numero_show>input').prop('disabled', true);
+            $('#cidade_show>input').prop('disabled', true);
+            $('#uf_show>input').prop('disabled', true);
 
 
             $('#btnSubmit').css("background-color", "#1C1C1C");
@@ -147,16 +125,16 @@
                 url: "{{ route('fornecedor.store') }}",
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
-                    'nome_fantasia': $('#nome_fantasia>input').val(),
-                    'cnpj': $('#cnpj>input').val(),
+                    'nome_fantasia': $('#nome_fantasia_show>input').val(),
+                    'cnpj': $('#cnpj_show>input').val(),
                     'tipo': $('#tipo>select').val(),
-                    'telefone': $('#telefone>input').val(),
-                    'ddd': $('#ddd>input').val(),
-                    'email': $('#email>input').val(),
-                    'numero': $('#numero>input').val(),
-                    'endereco': $('#endereco>input').val(),
-                    'cidade': $('#cidade>input').val(),
-                    'uf': $('#uf>input').val(),
+                    'telefone': $('#telefone_show>input').val(),
+                    'ddd': $('#ddd_show>input').val(),
+                    'email': $('#email_show>input').val(),
+                    'numero': $('#numero_show>input').val(),
+                    'endereco': $('#endereco_show>input').val(),
+                    'cidade': $('#cidade_show>input').val(),
+                    'uf': $('#uf_show>input').val(),
 
                 },
                 dataType: 'json',

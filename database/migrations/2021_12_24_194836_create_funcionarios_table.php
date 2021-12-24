@@ -29,6 +29,7 @@ class CreateFuncionariosTable extends Migration
             $table->unsignedBigInteger('id_caixa');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('id_caixa')->references('id')->on('caixas');
         });
     }
 

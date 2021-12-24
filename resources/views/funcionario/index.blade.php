@@ -21,8 +21,8 @@
 
         <div class="item-area">
             <div class="manage-item-top">
-
-                <button type="button" id="btn" data-toggle="modal" data-target="#cadastrar-funcionario-modal">
+                @include('funcionario.create')
+                <button type="button" id="btn" data-bs-toggle="modal" data-bs-target="#cadastrar-funcionario-modal">
                     <img src="{{ asset("img/adicionar-item.svg")}}" alt="Adicionar funcionario">
                     Cadastrar Funcionário
                 </button>

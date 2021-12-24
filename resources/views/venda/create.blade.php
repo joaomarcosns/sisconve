@@ -20,7 +20,7 @@
                 <span>Realizar Venda</span>
             </div>
             <div class="caixa-id">
-                <span>Caixa ativo: <strong>0</strong></span>
+                <span>Caixa ativo: <strong>{{session('funcionario')->numero_caixa}}</strong></span>
             </div>
         </div>
 

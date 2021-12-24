@@ -28,13 +28,11 @@
                 @include('fornecedor.show')
                 @include('fornecedor.edit')
                 <!-- include modal -->
-
                 <button type="button" id="btn" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#fornecedorModal">
                     <img src="{{ asset("img/adicionar-item.svg")}}" alt="Adicionar fornecedor">
                     Cadastrar Fornecedor
                 </button>
-                
             </div>
 
             <div class="table-item-area" id="tableFornecedores">

@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ asset('css/modal/cadastro-fornecedor.css') }} ">
 <form class="form-signin" autocomplete="off" name="formEditFornecedor" id="formEditFornecedor">
     <div class="modal fade" id="fornecedorModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -8,11 +7,7 @@
                     <h5>Editar fornecedor</h5>
                     <div class="modal-header d-block modal-header-add-items float-right">
                         <div class="close-modal">
-<<<<<<< HEAD
-                            <img data-dismiss="modal" src="{{ asset("img/block-icon-black.svg")}}" alt="Fechar"
-=======
                             <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar"
->>>>>>> develop
                                 data-bs-dismiss="modal">
                         </div>
                     </div>

@@ -6,6 +6,7 @@ use App\Http\Requests\loginRequest;
 use App\Models\Funcionarios;
 use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -67,11 +68,17 @@ class LoginController extends Controller
 
         $email = trim($request->email);
         $senha = trim($request->senha);
-
         $funcionario = Funcionarios::where("email", $email)->first();
-
         if ($funcionario && Hash::check($senha, $funcionario->senha)) {
-            session()->put('funcionario', $funcionario);
+            $funcionarioSession = DB::table('funcionarios as f')
+            ->select('f.nome_funcionario', 'f.nivel_acesso', 'f.telefone', 
+            'f.endereco', 'f.cargo', 'f.salario', 'f.email', 'f.ativo', 
+            'c.numero_caixa')
+            ->join('caixas as c', 'f.id_caixa', '=', 'c.id')
+            ->where('f.id', $funcionario->id)
+            ->first();
+
+            session()->put('funcionario', $funcionarioSession);
             return redirect()->route('dashboard.index');
         } else {
             session()->flash('error', 'Usuario ou senha incorretos');

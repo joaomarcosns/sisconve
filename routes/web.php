@@ -85,4 +85,5 @@ Route::prefix('funcionario')->group(function () {
 Route::prefix('caixa')->group(function () {
     Route::get('/', [CaixaController::class, 'index'])->name('caixa.index');
     Route::get('/create', [CaixaController::class, 'create'])->name('caixa.create');
+    Route::post('/store', [CaixaController::class, 'store'])->name('caixa.store');
 });
