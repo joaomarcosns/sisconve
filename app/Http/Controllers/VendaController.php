@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\validate\ValidarLogin;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -88,5 +90,17 @@ class VendaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll() {
+        $cliente  = Cliente::where("ativo", "=", "1")->get();
+
+
+        $dados = [
+            "cliente" => $cliente
+            
+        ];
+
+        return json_encode($dados);
     }
 }

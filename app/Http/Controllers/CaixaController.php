@@ -30,6 +30,9 @@ class CaixaController extends Controller
      */
     public function create()
     {
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
         return view('caixa.index');
     }
 
@@ -41,6 +44,10 @@ class CaixaController extends Controller
      */
     public function store(CaixaRequest $request)
     {
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
+
         $caixa = Caixa::create($request->all());
         return json_encode($caixa);
     }

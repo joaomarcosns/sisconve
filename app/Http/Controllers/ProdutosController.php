@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Produtos;
+use App\validate\ValidarLogin;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -15,7 +16,9 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
         $produtos = Produtos::select('produtos.*', 'categorias.nome_categoria')
             ->join('categorias', 'categorias.id', '=', 'produtos.categoria_id')
             ->get();
@@ -29,6 +32,9 @@ class ProdutosController extends Controller
      */
     public function create()
     {
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
         $categorias = Categoria::where('ativo', '=', '1')->get();
         return json_encode($categorias);
     }
@@ -41,7 +47,9 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
         $produto = Produtos::create($request->all());
         return json_encode($produto);
     }
@@ -54,7 +62,10 @@ class ProdutosController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
+        
     }
 
     /**

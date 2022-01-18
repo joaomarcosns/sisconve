@@ -51,14 +51,12 @@
 
                 },
                 success: function(response) {
-                    console.log(response);
                     $('#nomecategoria>input').prop('disabled', false);
                     $('#submit').prop('disabled', false);
                 },
                 error: function(response) {
                     const data = response.responseJSON;
                     const teste = data.errors;
-                    console.log(teste);
                     for (let i in teste) {
                         for (let j in teste[i]) {
                             $(`#${i}>input`).addClass('is-invalid');

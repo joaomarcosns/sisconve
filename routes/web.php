@@ -80,6 +80,9 @@ Route::prefix('compra')->group(function () {
 Route::prefix('funcionario')->group(function () {
     Route::get('/', [FuncionarioController::class, 'index'])->name('funcionario.index');
     Route::get('/create', [FuncionarioController::class, 'create'])->name('funcionario.create');
+    Route::get('/getCaixas', [FuncionarioController::class, 'getCaixas'])->name('funcionario.getCaixas');
+    Route::post('/store', [FuncionarioController::class, 'store'])->name('funcionario.store');
+    Route::get('/show/{id}', [FuncionarioController::class, 'show'])->name('funcionario.show');
 });
 
 Route::prefix('caixa')->group(function () {

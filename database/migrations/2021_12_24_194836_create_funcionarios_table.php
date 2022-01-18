@@ -26,7 +26,7 @@ class CreateFuncionariosTable extends Migration
             $table->boolean("ativo")->default(true);
             $table->tinyInteger('nivel_acesso')->default(3)->comment('1 - Admin, 2 - Caixa, 3 - Funcionário');
             $table->dateTime('ultimo_login')->nullable();
-            $table->unsignedBigInteger('id_caixa');
+            $table->unsignedBigInteger('id_caixa')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_caixa')->references('id')->on('caixas');

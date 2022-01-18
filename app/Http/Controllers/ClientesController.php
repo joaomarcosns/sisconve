@@ -106,9 +106,6 @@ class ClientesController extends Controller
             'enderecos' => $enderecos,
             'contatos' => $contatos
         ];
-        
-        // return dd($dados);
-        // return view('clientes.show', $dados);
         return json_encode($dados);
     }
 
