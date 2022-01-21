@@ -6,14 +6,14 @@
         <div class="title-content">
             <div class="title-text">
                 <span>
-                    <a href="{{route('dashboard.index')}}">
-                        <img src="{{ asset("img/dashboard-verde.svg")}}" alt="Dashboard">
+                    <a href="{{ route('dashboard.index') }}">
+                        <img src="{{ asset('img/dashboard-verde.svg') }}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="{{ asset("img/plus-icon-dark.svg")}}" alt="Compras">
+                    <img src="{{ asset('img/plus-icon-dark.svg') }}" alt="Compras">
                     Compras
                 </span>
             </div>
@@ -36,24 +36,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="item-details">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a title="Ver compra" href="#">
-                                    <img src="{{ asset("img/eye-icon.svg")}}" alt="">
-                                </a>
-                                <a title="Editar compra" href="#">
-                                    <img src="{{ asset("img/pencil-icon.svg")}}" alt="">
-                                </a>
-                                <a title="Exluir compra" href="#">
-                                    <img src="{{ asset("img/trash-icon.svg")}}" alt="">
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach ($compras as $compra)
+                            <tr id="item-details">
+                                <td>{{$compra->id}}</td>
+                                <td>{{$compra->nome_funcionario}}</td>
+                                <td>{{$compra->nome_fantasia}}</td>
+                                <td>R$ {{number_format($compra->valor_total)}}</td>
+                                <td>{{ date('d/m/Y', strtotime($compra->created_at)) }}</td>
+                                <td>
+                                    <a title="Ver compra" href="#">
+                                        <img src="{{ asset('img/eye-icon.svg') }}" alt="">
+                                    </a>
+                                    <a title="Editar compra" href="#">
+                                        <img src="{{ asset('img/pencil-icon.svg') }}" alt="">
+                                    </a>
+                                    <a title="Exluir compra" href="#">
+                                        <img src="{{ asset('img/trash-icon.svg') }}" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

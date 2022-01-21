@@ -7,3 +7,4 @@ php artisan db:seed --class=ContatosCliente
 php artisan db:seed --class=EnderecoCliente
 php artisan db:seed --class=Categoria
 php artisan db:seed --class=Produto
+php artisan db:seed --class=FormaPagamento

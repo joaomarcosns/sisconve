@@ -2,18 +2,28 @@
 @section('title', 'Comprar')
 
 @section('conteudo')
+    @if (session('error'))
+        <div class="alert alert-error">
+            {{ session('error') }}
+        </div>
+    @elseif (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="dashboard buy-page">
         <div class="title-content">
             <div class="title-text">
                 <span>
                     <a href="{{ route('dashboard.index') }}">
-                        <img src="{{ asset('img/dashboard-verde.svg')}}" alt="Dashboard">
+                        <img src="{{ asset('img/dashboard-verde.svg') }}" alt="Dashboard">
                         Dashboard
                     </a>
                 </span>
                 <span>/</span>
                 <span>
-                    <img src="{{ asset('img/plus-icon-dark.svg')}}" alt="Compras">
+                    <img src="{{ asset('img/plus-icon-dark.svg') }}" alt="Compras">
                     Compras
                     <span>/</span>
                     Registrar compra
@@ -21,7 +31,9 @@
             </div>
         </div>
 
-        <form action="" class="buy" method="POST" onsubmit="setFormSubmitting()">
+        <form action="{{ route('compra.store') }}" class="buy" method="POST" onsubmit="setFormSubmitting()"
+            id="">
+            @csrf
             <div class="buy-area">
                 <div class="section section-buy-area p-0 m-0">
                     <div class="title-section">
@@ -48,7 +60,7 @@
                     <div class="buy-info">
                         <div class="fornecedor">
                             <button type="button" id="btn" data-toggle="modal" data-target="#fornecedor-modal">
-                                <img src="{{ asset('img/fornecedor.svg')}}" alt="Fornecedor">
+                                <img src="{{ asset('img/fornecedor.svg') }}" alt="Fornecedor">
                                 Fornecedor
                             </button>
                             <div class="data-buy-info">
@@ -64,21 +76,21 @@
                                     <div class="modal-header float-right">
                                         <h5>Fornecedor</h5>
                                         <div class="close-modal">
-                                            <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar">
+                                            <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}"
+                                                alt="Fechar">
                                         </div>
                                     </div>
 
                                     <div class="modal-select">
                                         <label for="fornecedor">Selecione um fornecedor</label>
-                                        <select name="fornecedor" id="nome-fornecedor">
+                                        <select name="fornecedor_id" id="nome-fornecedor">
                                             <option value="" selected disabled>SELECIONE UM FORNECEDOR</option>
-
                                         </select>
                                     </div>
 
                                     <div class="modal-footer">
                                         <button type="button" class="confirm" data-dismiss="modal">
-                                            <img src="{{ asset('img/check-icon.svg')}}" alt="Confirmar">
+                                            <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                         </button>
                                     </div>
                                 </div>
@@ -89,7 +101,7 @@
                         <div class="payment">
                             <button type="button" id="btn" data-toggle="modal" onclick="metPagamento()"
                                 data-target="#payment-modal">
-                                <img src="{{ asset('img/Meio-Pagamento.svg')}}" alt="Metodo de Pagamento">
+                                <img src="{{ asset('img/Meio-Pagamento.svg') }}" alt="Metodo de Pagamento">
                                 Pagamento
                             </button>
                             <div class="data-buy-info">
@@ -105,7 +117,8 @@
                                     <div class="modal-header float-right">
                                         <h5>Método de Pagamento</h5>
                                         <div class="close-modal">
-                                            <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}" alt="Fechar">
+                                            <img data-dismiss="modal" src="{{ asset('img/block-icon-black.svg') }}"
+                                                alt="Fechar">
                                         </div>
                                     </div>
 
@@ -119,14 +132,14 @@
                                         </div>
                                         <div class="input-parcel">
                                             <label for="num-parcelas">Número de parcelas</label>
-                                            <input type="text" id="input-parcela" name="num-parcelas" min="1" max="99"
+                                            <input type="text" id="input-parcela" name="parcelas" min="1" max="99"
                                                 oninput="validaInputNumber(this)" maxlength="2" value="1" required>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
                                         <button type="button" class="confirm" data-dismiss="modal">
-                                            <img src="{{ asset('img/check-icon.svg')}}" alt="Confirmar">
+                                            <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                         </button>
                                     </div>
                                 </div>
@@ -136,7 +149,7 @@
 
                         <div class="add-product">
                             <button type="button" id="btn-add-item" data-toggle="modal" data-target="#add-item-modal">
-                                <img src="{{ asset('img/adicionar-item.svg')}}" alt="Adicionar Item">
+                                <img src="{{ asset('img/adicionar-item.svg') }}" alt="Adicionar Item">
                                 Adicionar Item
                             </button>
 
@@ -205,12 +218,12 @@
                                             <button type="button" class="exit-add" data-dismiss="modal"
                                                 class="cancel btn-modal">
                                                 Cancelar
-                                                <img src="{{ asset('img/block-icon.svg')}}" alt="Cancelar">
+                                                <img src="{{ asset('img/block-icon.svg') }}" alt="Cancelar">
                                             </button>
                                             <button type="button" class="confirm-add" id="btn-add-item-modal"
                                                 data-dismiss="modal" class="confirm btn-modal">
                                                 Adicionar
-                                                <img src="{{ asset('img/check-icon.svg')}}" alt="Confirmar">
+                                                <img src="{{ asset('img/check-icon.svg') }}" alt="Confirmar">
                                             </button>
                                         </div>
                                     </div>
@@ -231,14 +244,214 @@
                 <div class="buttons">
                     <button type="button" id="cancelar-compra" class="cancel">
                         <span>Limpar Lista</span>
-                        <img src="{{ asset('img/block-icon.svg')}}" alt="Limpar Lista">
+                        <img src="{{ asset('img/block-icon.svg') }}" alt="Limpar Lista">
                     </button>
                     <button type="submit" id="finalizar-compra" class="accept">
                         <span>Registrar Compra</span>
-                        <img src="{{ asset('img/check-icon.svg')}}" alt="Finalizar compra">
+                        <img src="{{ asset('img/check-icon.svg') }}" alt="Finalizar compra">
                     </button>
                 </div>
             </div>
         </form>
-    </div>\
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        var produtos = [];
+        var fornecedor = [];
+        var metPag = [];
+
+
+        $(document).ready(function() {
+            metPag[1] = {
+                id: 1,
+                tipo: "à vista"
+            }
+
+            var buttonAddItem = document.getElementById("btn-add-item");
+            var buttonAddItemModal = document.getElementById("btn-add-item-modal");
+            var tableBodyItems = document.getElementById("table-body-items-compra");
+            var valorTotalVenda = document.getElementById("value-cart");
+
+            var inputNomeProduto = document.getElementById("nome-produto");
+            var inputQuantProduto = document.getElementById("quantidade-item");
+            var inputIcms = document.getElementById("icms");
+            var inputIpi = document.getElementById("ipi");
+            var inputFrete = document.getElementById("frete");
+            var inputPrecoUni = document.getElementById("valor-unit");
+
+            getFonecedores();
+            $("#btn-add-item").click(function(e) {
+                e.preventDefault();
+                inputNomeProduto.value = "";
+                inputQuantProduto.value = 1;
+                inputFrete.value = "0.00";
+                inputIcms.value = "0.00";
+                inputPrecoUni.value = "0.00";
+                inputIpi.value = "0.00";
+
+            });
+
+            $("#btn-add-item-modal").click(function(e) {
+                e.preventDefault();
+                if (inputNomeProduto.value != "" && inputQuantProduto.value != "") {
+                    var idProduto = produtos[inputNomeProduto.value].id;
+                    var nomeProduto = produtos[inputNomeProduto.value].nome;
+                    var quantidadeProduto = parseInt(inputQuantProduto.value)
+                    // valores em %
+                    var ipi = parseFloat(inputIpi.value) / 100;
+                    var icms = parseFloat(inputIcms.value) / 100;
+                    var frete = parseFloat(inputFrete.value) / 100;
+                    // valor unitario e total da compra  do produto
+                    var valorUni = parseFloat(inputPrecoUni.value);
+                    var valorTotal = parseFloat((((ipi + icms + frete) * valorUni) + valorUni) *
+                        quantidadeProduto);
+                    //var valorTotal = 
+
+                    tableBodyItems.innerHTML += `
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <input type="text" name="produto_id[]" value="${idProduto}" required style="display: none">
+                                ${nomeProduto}
+                            </td>
+                            <td>
+                                <input type="text" name="ipi[]" value="${ipi}" required style="display: none">
+                                <strong>${ipi.toFixed(2)} <small>%</small></strong>
+                            </td>
+                            <td>
+                                <input type="text" name="icms[]" value="${icms}" required style="display: none">
+                                <strong>${icms.toFixed(2)} <small>%</small></strong>
+                            </td>
+                            <td>
+                                <input type="text" name="frete[]" value="${frete}" required style="display: none">
+                                <strong>${frete.toFixed(2)} <small>%</small></strong>
+                            </td>
+                            <td>
+                                <input type="text" name="valor-unitario[]" value="${valorUni}" required style="display: none">
+                                R$ ${valorUni.toFixed(2)}
+                            </td>
+                            <td>
+                                <input type="text" id="quantidade" name="quantidade-produto[]" value="${quantidadeProduto}" required style="display: none">
+                                ${quantidadeProduto} unid
+                            </td>
+                            <td>
+                                <input type="text" id="valor-total" value="${valorTotal}" style="display: none">
+                                R$ ${valorTotal.toFixed(2)}
+                            </td>
+                            <td>
+                                <button title="Remover item" onclick="removeRow(this); console.log('Opa')" class="removeRow" type="button">
+                                    <img src="{{ asset('img/lixeira-btn.svg') }}" alt="Remover Produto">
+                                </button>
+                            </td>
+                        </tr>`;
+                }
+                setTotalValue();
+            });
+
+            /////////////////// Fornecedor ///////////////////////
+            var spanTxtSC = $("#name-fornecedor")
+            var selectFornecedor = $("#nome-fornecedor")
+
+            $("#nome-fornecedor").change(function(e) {
+                e.preventDefault();
+                $("#name-fornecedor").val(fornecedor[$("#nome-fornecedor").val()].nome.toUpperCase());
+            });
+
+            ////////////////// Metodo Pagamento ////////////////
+            var spanTxtMP = $("#met-pag");
+
+            $("#metodo-pagamento").change(function(e) {
+                e.preventDefault();
+                $("#met-pag").val(metPag[parseInt($("#metodo-pagamento").val())].tipo.toUpperCase());
+            });
+            ////////////////////////////////////////////////////////////////////////////////////
+            metPagamento();
+        });
+
+        function removeRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.remove(row);
+            setTotalValue();
+        }
+
+        function setTotalValue() {
+            var valores = document.querySelectorAll("#valor-total");
+            var valorTotal = 0;
+            valores.forEach((valor) => {
+                valorTotal += parseFloat(valor.value);
+            });
+
+            $("#value-cart").html(valorTotal.toFixed(2));
+        }
+
+        function getFonecedores() {
+            $.ajax({
+                url: "{{ route('compra.getAll') }}",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+
+                    // fornecedor
+                    $('#nome-fornecedor').empty();
+                    $('#nome-fornecedor').append(
+                        '<option value="" disabled selected>Selecione um fornecedor</option>');
+                    $.each(response.fornecedores, function(key, value) {
+                        $('#nome-fornecedor').append('<option value="' + value.id + '">' + value
+                            .nome_fantasia + '</option>');
+                    });
+
+                    // produto
+                    $('#nome-produto').empty();
+                    $('#nome-produto').append(
+                        '<option value="" disabled selected>Selecione um produto</option>');
+                    $.each(response.produtos, function(key, value) {
+                        $('#nome-produto').append('<option value="' + value.id + '">' + value
+                            .nome_produto + '</option>');
+                    });
+
+                    // metodo-pagamento
+                    $.each(response.metodosPagamentos, function(key, value) {
+                        $('#metodo-pagamento').append('<option value="' + value.id + '">' + value
+                            .tipo_pagamento + '</option>');
+                    });
+
+                    response.produtos.forEach(element => {
+                        produtos[`${element.id}`] = {
+                            id: parseInt(element.id),
+                            nome: element.nome_produto,
+                        }
+                    });
+
+
+                    response.fornecedores.forEach(element => {
+                        fornecedor[`${element.id}`] = {
+                            id: parseInt(element.id),
+                            nome: element.nome_fantasia,
+                        }
+                    });
+
+                    response.metodosPagamentos.forEach(element => {
+                        metPag[`${element.id}`] = {
+                            id: parseInt(element.id),
+                            tipo: element.tipo_pagamento,
+                        }
+                    });
+                }
+            });
+        }
+
+
+        function metPagamento() {
+            var selectMetPag = document.getElementById("metodo-pagamento");
+            var inputParcela = document.getElementById("input-parcela");
+            if (parseInt(selectMetPag.value) == 1) {
+                inputParcela.value = 1;
+                inputParcela.readOnly = true;
+            } else {
+                inputParcela.readOnly = false;
+            }
+        }
+    </script>
 @endsection

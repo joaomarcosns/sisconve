@@ -18,6 +18,8 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.material.min.js"></script>
     <script src="{{ asset('js/toastNotify.js') }}"></script>
+    {{-- <script src="{{ asset('js/metPagamento.js') }}"></script> --}}
+    <script src="{{ asset('js/validaInput.js') }}"></script>
 
 
     {{--  --}}

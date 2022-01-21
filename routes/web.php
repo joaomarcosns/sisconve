@@ -75,6 +75,8 @@ Route::prefix('venda')->group(function () {
 Route::prefix('compra')->group(function () {
     Route::get('/', [CompraController::class, 'index'])->name('compra.index');
     Route::get('/create', [CompraController::class, 'create'])->name('compra.create');
+    Route::get('/getAll', [CompraController::class, 'getAll'])->name('compra.getAll');
+    Route::post('/store', [CompraController::class, 'store'])->name('compra.store');
 });
 
 Route::prefix('funcionario')->group(function () {

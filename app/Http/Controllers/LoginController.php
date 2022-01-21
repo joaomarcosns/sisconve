@@ -71,7 +71,7 @@ class LoginController extends Controller
         $funcionario = Funcionarios::where("email", $email)->first();
         if ($funcionario && Hash::check($senha, $funcionario->senha)) {
             $funcionarioSession = DB::table('funcionarios as f')
-            ->select('f.nome_funcionario', 'f.nivel_acesso', 'f.telefone', 
+            ->select('f.id', 'f.nome_funcionario', 'f.nivel_acesso', 'f.telefone', 
             'f.endereco', 'f.cargo', 'f.salario', 'f.email', 'f.ativo', 
             'c.numero_caixa')
             ->join('caixas as c', 'f.id_caixa', '=', 'c.id')
