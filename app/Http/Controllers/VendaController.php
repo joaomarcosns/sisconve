@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\FormaPagamento;
+use App\Models\ItemVenda;
+use App\Models\PagamentoVenda;
 use App\Models\Produtos;
+use App\Models\Venda;
 use App\validate\ValidarLogin;
 use Database\Seeders\Produto;
 use Facade\FlareClient\Http\Client;
@@ -47,8 +50,67 @@ class VendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return json_encode($request->all());
+        if (!ValidarLogin::verificaSessao()) {
+            return redirect()->route('login.create');
+        }
+
+        $valorTotal = 0.0;
+        $produtos = $request->id_produto;
+        $quantidades = $request->quantidade_produto;
+        $cliente = $request->cliente;
+        $forma_pagamento = $request->metodo_pagamento;
+        $parcelas = $request->num_parcelas;
+
+
+        if (empty($produtos)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum produto foi selecionado');
+        } elseif (empty($cliente)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum Cliente foi selecionado');
+        }
+
+
+        for ($i=0; $i < count($produtos); $i++) { 
+            $produto = Produtos::find($produtos[$i]);
+            $valorTotal += $produto->preco_venda * $quantidades[$i];
+        }
+
+        $venda = new Venda();
+        $venda->caixa_id = session('funcionario')->numero_caixa;
+        $venda->cliente_id = $cliente;
+        $venda->valor_total = $valorTotal;
+        $venda->parcela = $parcelas;
+        $venda->devolvido = 0;
+        $venda->save();
+
+        $pagamentoVenda = new PagamentoVenda();
+        $pagamentoVenda->venda_id = $venda->id;
+        $pagamentoVenda->forma_pagamento_id = $forma_pagamento;
+        $pagamentoVenda->parcela = $parcelas;
+        if ($parcelas == 1) {
+            $pagamentoVenda->data_pagamento = date('Y-m-d');
+            $pagamentoVenda->status = 'Pago';
+            $pagamentoVenda->valor_pago = $valorTotal;
+        } else {
+            $pagamentoVenda->data_pagamento = date('Y-m-d', strtotime('+1 month'));
+        }
+        $pagamentoVenda->save();
+
+        for ($i=0; $i < count($produtos); $i++) { 
+            $itemVenda = new ItemVenda();
+            $itemVenda->venda_id = $venda->id;
+            $itemVenda->produto_id = $produtos[$i];
+            $itemVenda->quantidade = $quantidades[$i];
+            $itemVenda->valor_unitario = Produtos::find($produtos[$i])->preco_venda;
+            $itemVenda->valor_total = $itemVenda->valor_unitario * $itemVenda->quantidade;
+            $itemVenda->save();
+
+            $produto = Produtos::find($produtos[$i]);
+            $produto->quantidade -= $quantidades[$i];
+            $produto->save();
+        }
+
+        return redirect()->route('venda.create')->with('success', 'Venda realizada com sucesso');
+        
     }
 
     /**

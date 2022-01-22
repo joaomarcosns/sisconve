@@ -1,7 +1,20 @@
 @extends('layout.layout')
-@section('title', 'Venda')
+@section('title', 'Realizar Venda')
 
 @section('conteudo')
+    @if (session('error'))
+        <div class="toast fade show slideInUp" id="toast">
+            <div class="toast-body bg-red">
+                {{ session('error') }}
+            </div>
+        </div>
+    @elseif (session('success'))
+        <div class="toast fade show slideInUp" id="toast">
+            <div class="toast-body bg-green">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
     <div class="dashboard sell-products">
         <div class="title-content">
             <div class="title-text">
@@ -112,7 +125,7 @@
                                         <div class="modal-select d-flex">
                                             <div class="input-met-pag">
                                                 <label for="metodo-pagamento">Selecione o método de pagamento</label>
-                                                <select name="metodo-pagamento" id="metodo-pagamento"
+                                                <select name="metodo_pagamento" id="metodo-pagamento"
                                                     onchange="metPagamento()" required>
                                                     <option value="1" selected>À VISTA</option>
 
@@ -120,7 +133,7 @@
                                             </div>
                                             <div class="input-parcel">
                                                 <label for="num-parcelas">Número de parcelas</label>
-                                                <input type="text" id="input-parcela" name="num-parcelas" min="1" max="99"
+                                                <input type="text" id="input-parcela" name="num_parcelas" min="1" max="99"
                                                     oninput="validaInputNumber(this)" maxlength="2" value="1" required>
                                             </div>
                                         </div>
@@ -247,7 +260,7 @@
                 inputQuantProduto.value = 1;
             });
 
-            $("#btn-add-item-modal").click(function (e) { 
+            $("#btn-add-item-modal").click(function(e) {
                 e.preventDefault();
 
                 if (inputQuantProduto.value > estoqueProduto[inputNomeProduto.value]) {
@@ -262,15 +275,15 @@
                 <tr>
                     <td>${indiceTable+1}</td>
                     <td>
-                        <input type="text" name="id-produto[]" value="${inputNomeProduto.value}" required style="display: none">
+                        <input type="text" name="id_produto[]" value="${inputNomeProduto.value}" required style="display: none">
                         ${produtos[inputNomeProduto.value].nome}
                     </td>
                     <td>
-                        <input type="text" name="valor-unitario[]" value="${(produtos[inputNomeProduto.value].valor).toFixed(2)}" required style="display: none">
+                        <input type="text" name="valor_unitario[]" value="${(produtos[inputNomeProduto.value].valor).toFixed(2)}" required style="display: none">
                         R$ ${(produtos[inputNomeProduto.value].valor).toFixed(2)}
                     </td>
                     <td>
-                        <input type="text" id="quantidade-produto" name="quantidade-produto[]" value="${inputQuantProduto.value}" required style="display: none">
+                        <input type="text" id="quantidade-produto" name="quantidade_produto[]" value="${inputQuantProduto.value}" required style="display: none">
                         ${inputQuantProduto.value} unid
                     </td>
                     <td>
