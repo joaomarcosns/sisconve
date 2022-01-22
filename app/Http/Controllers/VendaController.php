@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\FormaPagamento;
+use App\Models\Produtos;
 use App\validate\ValidarLogin;
+use Database\Seeders\Produto;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 
@@ -45,6 +48,7 @@ class VendaController extends Controller
     public function store(Request $request)
     {
         //
+        return json_encode($request->all());
     }
 
     /**
@@ -56,6 +60,8 @@ class VendaController extends Controller
     public function show($id)
     {
         //
+            
+        
     }
 
     /**
@@ -93,12 +99,20 @@ class VendaController extends Controller
     }
 
     public function getAll() {
-        $cliente  = Cliente::where("ativo", "=", "1")->get();
+        $clientes  = Cliente::select('id', 'nome')
+        ->where('ativo', '=', 1)
+        ->get();
 
+        $produto = Produtos::select('id', 'nome_produto as nome', 'preco_venda', 'quantidade')
+        ->where('ativo', '=', 1)
+        ->get();
 
+        $metoPagamento = FormaPagamento::select('id', 'tipo_pagamento as nome')->get();
+        
         $dados = [
-            "cliente" => $cliente
-            
+            'clientes' => $clientes,
+            'produtos' => $produto,
+            'metoPagamento' => $metoPagamento
         ];
 
         return json_encode($dados);

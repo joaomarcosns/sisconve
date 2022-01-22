@@ -3,13 +3,17 @@
 
 @section('conteudo')
     @if (session('error'))
-        <div class="alert alert-error">
+    <div class="toast fade show slideInUp" id="toast">
+        <div class="toast-body bg-red">
             {{ session('error') }}
         </div>
+    </div>
     @elseif (session('success'))
-        <div class="alert alert-success">
+    <div class="toast fade show slideInUp" id="toast">
+        <div class="toast-body bg-green">
             {{ session('success') }}
         </div>
+    </div>
     @endif
 
     <div class="dashboard buy-page">

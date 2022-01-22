@@ -70,6 +70,9 @@ Route::prefix('produto')->group(function () {
 Route::prefix('venda')->group(function () {
     Route::get('/', [VendaController::class, 'index'])->name('venda.index');
     Route::get('/create', [VendaController::class, 'create'])->name('venda.create');
+    Route::get('/getAll', [VendaController::class, 'getAll'])->name('venda.getAll');
+    Route::post('/store', [VendaController::class, 'store'])->name('venda.store');
+
 });
 
 Route::prefix('compra')->group(function () {

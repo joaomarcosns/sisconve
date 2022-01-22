@@ -62,7 +62,7 @@ class CompraController extends Controller
         $quantidade = $request->input('quantidade-produto');
         $valor_unitario = $request->input('valor-unitario');
         $parcela = $request->input('parcelas');
-        $fornecedor_id = $request->input('fornecedor_id'); 
+        $fornecedor_id = $request->input('fornecedor_id');
         $forma_pagamento_id = $request->input('metodo-pagamento');
         $acrescimo_despesas = 0.4;
         $ipi = $request->input('ipi');
@@ -73,6 +73,8 @@ class CompraController extends Controller
 
         if (empty($produtos)) {
             return redirect()->route('compra.create')->with('error', 'Nenhum produto foi selecionado');
+        } elseif (empty($fornecedor_id)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum fornecedor foi selecionado');
         }
 
         for ($i = 0; $i < count($produtos); $i++) {
@@ -101,14 +103,16 @@ class CompraController extends Controller
 
         if (intval($parcela) == 1) {
             $pagamentoCompra->valor_pago = floatval(number_format($preco_compra, 2));
-            $pagamentoCompra->data_pagamento = date('Y-m-d');
+            $pagamentoCompra->data_pagamento = date('Y-m-d H:i:s');
             $pagamentoCompra->status = 'Pago';
         } else {
             $pagamentoCompra->valor_pago = 0.0;
-            $pagamentoCompra->data_pagamento = null;
+            $date = date('Y-m-d H:i:s');
+            $pagamentoCompra->data_pagamento = date('d/m/Y', strtotime("+2 days", strtotime($date)));;
         }
+        $pagamentoCompra->save();
 
-        for ($i=0; $i < count($produtos); $i++) { 
+        for ($i = 0; $i < count($produtos); $i++) {
             // $ipiFloatval = floatval($ipi[$i]);
             // $icmsFloatval = floatval($icms[$i]);
             // $freteFloatval = floatval($frete[$i]);
@@ -129,7 +133,7 @@ class CompraController extends Controller
             $itemCompra->desconto = 0.0;
             $itemCompra->save();
 
-            
+
             $produto = Produtos::findOrFail($produtos[$i]);
             $produto->icms = $icms[$i];
             $produto->ipi = $ipi[$i];
@@ -144,7 +148,7 @@ class CompraController extends Controller
 
             $produto->save();
         }
-        
+
         return redirect()->route('compra.create')->with('success', 'Compra realizada com sucesso');
     }
 
@@ -200,13 +204,18 @@ class CompraController extends Controller
             return redirect()->route('login.create');
         }
     }
- 
-    public function getAll() {
+
+    public function getAll()
+    {
         if (!ValidarLogin::verificaSessao()) {
             return redirect()->route('login.create');
         }
-        $fornecedor = Fornecedor::select('id', 'nome_fantasia')->get();
-        $produto = Produtos::select('id', 'nome_produto')->get();
+        $fornecedor = Fornecedor::select('id', 'nome_fantasia')
+            ->where('status', '=', 1)
+            ->get();
+        $produto = Produtos::select('id', 'nome_produto')
+            ->where('ativo', '=', 1)
+            ->get();
         $metoPagamento = FormaPagamento::select('id', 'tipo_pagamento')->get();
         $dados = [
             'fornecedores' => $fornecedor,

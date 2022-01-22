@@ -20,11 +20,12 @@
                 <span>Realizar Venda</span>
             </div>
             <div class="caixa-id">
-                <span>Caixa ativo: <strong>{{session('funcionario')->numero_caixa}}</strong></span>
+                <span>Caixa ativo: <strong>{{ session('funcionario')->numero_caixa }}</strong></span>
             </div>
         </div>
 
-        <form action="#" method="POST" class="sell" onsubmit="setFormSubmitting()">
+        <form action="{{ route('venda.store') }}" method="POST" class="sell" onsubmit="setFormSubmitting()">
+            @csrf
             <div class="sell-area">
                 <div class="section section-sell-area p-0 m-0">
                     <div class="title-section">
@@ -71,7 +72,6 @@
                                         <div class="modal-select">
                                             <label for="cliente">Selecione um cliente</label>
                                             <select name="cliente" id="nome-cliente">
-                                                <option value="1" selected>CLIENTE PADRÃO</option>
                                             </select>
                                         </div>
 
@@ -89,7 +89,7 @@
                         <div class="payment">
                             <button type="button" id="btn" onclick="metPagamento()" data-toggle="modal"
                                 data-target="#payment-modal">
-                                <img src="{{ asset('img/Meio-Pagamento.svg')}}" alt="Metodo de Pagamento">
+                                <img src="{{ asset('img/Meio-Pagamento.svg') }}" alt="Metodo de Pagamento">
                                 Pagamento
                             </button>
                             <div class="data-sell-info">
@@ -215,37 +215,50 @@
     </div>
 @endsection
 
-<script>
-    var produtos = [];
-    var estoqueProduto = [];
 
-    var buttonAddItem = document.getElementById("btn-add-item");
-    var inputNomeProduto = document.getElementById("nome-produto");
-    var inputQuantProduto = document.getElementById("quantidade-item");
-    var tableBodyItems = document.getElementById("table-body-items-venda");
-    var buttonAddItemModal = document.getElementById("btn-add-item-modal");
-    var cancelarVenda = document.getElementById("cancelar-venda");
-    var finalizarVenda = document.getElementById("finalizar-venda");
-    var valorTotalVenda = document.getElementById("value-cart");
-    var table = document.getElementById("table-items-venda");
-    var indiceTable = 0;
+@section('script')
+    <script>
+        var produtos = [];
+        var estoqueProduto = [];
+        var clientes = [];
+        var metPag = [];
 
-    buttonAddItem.addEventListener("click", () => {
-        inputNomeProduto.value = "";
-        inputQuantProduto.value = 1;
-    });
+        $(document).ready(function() {
+            metPag[1] = {
+                id: 1,
+                tipo: "à vista"
+            }
+            getAll();
 
-    buttonAddItemModal.addEventListener("click", () => {
 
-        if (inputQuantProduto.value > estoqueProduto[inputNomeProduto.value]) {
-            return alert("Não existe essa quantidade para esse produto cadastrado em estoque!");
-        }
+            var buttonAddItem = document.getElementById("btn-add-item");
+            var inputNomeProduto = document.getElementById("nome-produto");
+            var inputQuantProduto = document.getElementById("quantidade-item");
+            var tableBodyItems = document.getElementById("table-body-items-venda");
+            var buttonAddItemModal = document.getElementById("btn-add-item-modal");
+            var cancelarVenda = document.getElementById("cancelar-venda");
+            var finalizarVenda = document.getElementById("finalizar-venda");
+            var valorTotalVenda = document.getElementById("value-cart");
+            var table = document.getElementById("table-items-venda");
+            var indiceTable = 0;
 
-        if (inputNomeProduto.value != "" && inputQuantProduto.value != "") {
+            buttonAddItem.addEventListener("click", () => {
+                inputNomeProduto.value = "";
+                inputQuantProduto.value = 1;
+            });
 
-            estoqueProduto[inputNomeProduto.value] -= inputQuantProduto.value;
+            $("#btn-add-item-modal").click(function (e) { 
+                e.preventDefault();
 
-            tableBodyItems.innerHTML += `
+                if (inputQuantProduto.value > estoqueProduto[inputNomeProduto.value]) {
+                    return alert("Não existe essa quantidade para esse produto cadastrado em estoque!");
+                }
+
+                if (inputNomeProduto.value != "" && inputQuantProduto.value != "") {
+
+                    estoqueProduto[inputNomeProduto.value] -= inputQuantProduto.value;
+
+                    tableBodyItems.innerHTML += `
                 <tr>
                     <td>${indiceTable+1}</td>
                     <td>
@@ -271,84 +284,158 @@
                     </td>
                 </tr>
             `;
-        }
+                }
 
-        indiceTable++;
-        countTableRows();
-        setTotalValue();
-    });
+                indiceTable++;
+                countTableRows();
+                setTotalValue();
+            });
 
-    function setTotalValue() {
-        var valores = document.querySelectorAll("#valor-total-produto");
-        var valorTotal = 0;
-        valores.forEach((valor) => {
-            valorTotal += parseFloat(valor.value);
+
+
+            function countTableRows() {
+                if (table.rows.length == 1) {
+                    finalizarVenda.disabled = true;
+                    cancelarVenda.disabled = true;
+                    finalizarVenda.style.cursor = "not-allowed";
+                    cancelarVenda.style.cursor = "not-allowed";
+                    finalizarVenda.style.opacity = "70%";
+                    cancelarVenda.style.opacity = "70%";
+                } else {
+                    finalizarVenda.disabled = false;
+                    cancelarVenda.disabled = false;
+                    finalizarVenda.style.cursor = "pointer";
+                    cancelarVenda.style.cursor = "pointer";
+                    finalizarVenda.style.opacity = "100%";
+                    cancelarVenda.style.opacity = "100%";
+                }
+            }
+
+            cancelarVenda.addEventListener("click", () => {
+                var value = confirm("Deseja cancelar a venda?");
+                if (value) {
+                    tableBodyItems.innerHTML = "";
+                    // devolvendo a quantidade dos produtos para a variavel estoque
+                    produtos.forEach(produto => {
+                        estoqueProduto[produto.id] = produto.quantidade;
+                    });
+                }
+                indiceTable = 0;
+                countTableRows();
+                setTotalValue();
+            });
+
+            // //////////////////////////////////////////////////
+            // //                 modal clientes
+
+            // var clientes = [];
+            $("#nome-cliente").change(function(e) {
+                e.preventDefault();
+                $("#name-client").val(clientes[$("#nome-cliente").val()].nome.toUpperCase());
+
+            });
+
+            // //////////////////////////////////////////////////
+            // //           modal metodo de pagamento
+            $("#metodo-pagamento").change(function(e) {
+                e.preventDefault();
+                $("#met-pag").val(metPag[parseInt($("#metodo-pagamento").val())].tipo.toUpperCase());
+            });
+            /////////////////////////////////////
+            metPagamento();
         });
 
-        valorTotalVenda.innerHTML = valorTotal.toFixed(2);
-    }
-
-    function removeRow(btn) {
-        var row = btn.parentNode.parentNode;
-        row.remove(row);
-        countTableRows();
-        setTotalValue();
-    }
-
-    function countTableRows() {
-        if (table.rows.length == 1) {
-            finalizarVenda.disabled = true;
-            cancelarVenda.disabled = true;
-            finalizarVenda.style.cursor = "not-allowed";
-            cancelarVenda.style.cursor = "not-allowed";
-            finalizarVenda.style.opacity = "70%";
-            cancelarVenda.style.opacity = "70%";
-        } else {
-            finalizarVenda.disabled = false;
-            cancelarVenda.disabled = false;
-            finalizarVenda.style.cursor = "pointer";
-            cancelarVenda.style.cursor = "pointer";
-            finalizarVenda.style.opacity = "100%";
-            cancelarVenda.style.opacity = "100%";
+        function validaInputNumber(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
         }
-    }
 
-    cancelarVenda.addEventListener("click", () => {
-        var value = confirm("Deseja cancelar a venda?");
-        if (value) {
-            tableBodyItems.innerHTML = "";
-            // devolvendo a quantidade dos produtos para a variavel estoque
-            produtos.forEach(produto => {
-                estoqueProduto[produto.id] = produto.quantidade;
+        function setTotalValue() {
+            var valores = document.querySelectorAll("#valor-total-produtoZ");
+            var valorTotal = 0;
+            valores.forEach((valor) => {
+                valorTotal += parseFloat(valor.value);
+            });
+
+            $("#value-cart").html(valorTotal.toFixed(2));
+        }
+
+        function removeRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.remove(row);
+            setTotalValue();
+        }
+
+        function getAll() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('venda.getAll') }}",
+                dataType: "json",
+                success: function(response) {
+                    $('#nome-cliente').empty();
+                    $('#nome-cliente').append(
+                        '<option value="" disabled selected>Selecione um produto</option>');
+                    response.clientes.forEach(function(cliente) {
+                        $('#nome-cliente').append('<option value="' + cliente.id + '">' + cliente.nome +
+                            '</option>');
+                    });
+
+                    response.metoPagamento.forEach(function(metoPagamento) {
+                        $('#metodo-pagamento').append('<option value="' + metoPagamento.id + '">' +
+                            metoPagamento.nome + '</option>');
+                    });
+
+                    $('nome-produto').empty();
+                    $('nome-produto').append(
+                        '<option value="" disabled selected>Selecione um produto</option>');
+                    response.produtos.forEach(function(produto) {
+                        $('#nome-produto').append('<option value="' + produto.id + '">' + produto.nome +
+                            '</option>');
+                    });
+
+
+                    response.produtos.forEach(function(element) {
+                        produtos[`${element.id}`] = {
+                            id: element.id,
+                            nome: element.nome,
+                            valor: element.preco_venda,
+                            quantidade: element.quantidade
+                        }
+                        estoqueProduto[`${element.id}`] = {
+                            id: element.id,
+                            quantidade: element.quantidade
+                        }
+                    });
+
+                    response.clientes.forEach(function(element) {
+                        clientes[`${element.id}`] = {
+                            id: element.id,
+                            nome: element.nome
+                        }
+                    });
+
+                    response.metoPagamento.forEach(element => {
+                        metPag[`${element.id}`] = {
+                            id: parseInt(element.id),
+                            tipo: element.nome,
+                        }
+                    });
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
             });
         }
-        indiceTable = 0;
-        countTableRows();
-        setTotalValue();
-    });
 
-    // //////////////////////////////////////////////////
-    // //                 modal clientes
-
-    // var clientes = [];
-
-
-    var spanTxtSC = document.getElementById("name-client");
-    var selectCliente = document.getElementById("nome-cliente");
-
-    selectCliente.addEventListener("change", () => {
-        spanTxtSC.value = clientes[parseInt(selectCliente.value)].nome.toUpperCase();
-    });
-
-    // //////////////////////////////////////////////////
-    // //           modal metodo de pagamento
-
-    
-
-    var spanTxtMP = document.getElementById("met-pag");
-    var metodoPagamento = document.getElementById("metodo-pagamento");
-
-    metodoPagamento.addEventListener("change", () => {
-        spanTxtMP.value = metPag[parseInt(metodoPagamento.value)].tipo.toUpperCase();
-    });
-</script>
+        function metPagamento() {
+            var selectMetPag = document.getElementById("metodo-pagamento");
+            var inputParcela = document.getElementById("input-parcela");
+            if (parseInt(selectMetPag.value) == 1) {
+                inputParcela.value = 1;
+                inputParcela.readOnly = true;
+            } else {
+                inputParcela.readOnly = false;
+            }
+        }
+    </script>
+@endsection
