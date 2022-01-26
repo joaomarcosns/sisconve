@@ -64,8 +64,8 @@ Route::prefix('produto')->group(function () {
     Route::post('/store', [ProdutosController::class, 'store'])->name('produto.store');
     Route::get('/show/{id}', [ProdutosController::class, 'show'])->name('produto.show');
     Route::get('/edit/{id}', [ProdutosController::class, 'edit'])->name('produto.edit');
-    Route::put('/update/{id}', [ProdutosController::class, 'update'])->name('produto.update');
-    Route::delete('/destroy/{id}', [ProdutosController::class, 'destroy'])->name('produto.destroy');
+    Route::put('/update', [ProdutosController::class, 'update'])->name('produto.update');
+    Route::delete('/destroy', [ProdutosController::class, 'destroy'])->name('produto.destroy');
 });
 
 Route::prefix('venda')->group(function () {
