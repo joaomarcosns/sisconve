@@ -108,9 +108,13 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $categorias = Categoria::findOrFail($request->id);
+        $categorias->nome_categoria = $request->nomecategoria;
+        $categorias->save();
+        return redirect()->route('categoria.index')->with('success', 'Categoria atualizada com sucesso');;
+        
     }
 
     /**
@@ -119,8 +123,11 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $categorias = Categoria::findOrFail($request->id);
+        $categorias->ativo = false;
+        $categorias->save();
+        return redirect()->route('categoria.index')->with('success', 'Categoria removida com sucesso');
     }
 }
