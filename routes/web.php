@@ -25,6 +25,7 @@ Route::prefix('login')->group(function () {
 Route::prefix("dashboard")->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/graficoUm', [DashboardController::class, 'graficoUm'])->name('dashboard.graficoUm');
+    Route::get('/graficoDois', [DashboardController::class, 'graficoDois'])->name('dashboard.graficoDois');
 });
 
 Route::prefix("cliente")->group(function () {

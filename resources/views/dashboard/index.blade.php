@@ -73,7 +73,7 @@
                                     <th>#</th>
                                     <th>Nome do Produto</th>
                                     <th>Valor Unitario</th>
-                                    <th>Quantidade</th>
+                                    <th>Quantidade em Estoque</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +91,7 @@
                     </div>
 
                     <!-- clientes que devem... -->
-                    <div class="section">
+                    {{-- <div class="section">
                         <div class="section-title">
                             <span><img src="{{ asset('img/cliParcleasVencendo.svg') }}" alt="">Clientes com parcelas
                                 vencendo</span>
@@ -114,8 +114,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-
+                    </div> --}}
                     {{-- Produto mais vendido --}}
                     <div class="section">
                         <div class="section-title d-flex justify-content-between">
@@ -138,17 +137,19 @@
                                     <th>#</th>
                                     <th>Nome do Produto</th>
                                     <th>Valor Unitario</th>
-                                    <th>Quantidade</th>
+                                    <th>Quantidade de Vendas</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{-- Produto mais vendido --}}
+                                @foreach ($produtoMaisVendidos as $produtoMaisVendido)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>R$ </td>
-                                        <td></td>
+                                        <td>{{ $produtoMaisVendido->id }}</td>
+                                        <td>{{ $produtoMaisVendido->nome_produto }}</td>
+                                        <td>R$ {{ $produtoMaisVendido->preco_venda }}</td>
+                                        <td>{{ $produtoMaisVendido->quantidade }}</td>
                                     </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -219,30 +220,41 @@
                 }
             });
         }
-        function graficoDois() {
-            var xValues = ["A", "B", "C", "D", "E"];
-            var yValues = [55, 49, 44, 24, 15];
-            var barColors = ["red", "green", "blue", "orange", "brown"];
 
-            new Chart("myChartDois", {
-                type: "bar",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: "Produto mais vendido"
-                    }
+        function graficoDois() {
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('dashboard.graficoDois') }}",
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                    // var xValues = ["A", "B", "C", "D", "E"];
+                    // var yValues = [55, 49, 44, 24, 15];
+                    // var barColors = ["red", "green", "blue", "orange", "brown"];
+
+                    new Chart("myChartDois", {
+                        type: "bar",
+                        data: {
+                            labels: response.nome,
+                            datasets: [{
+                                backgroundColor: response.cor,
+                                data: response.quantidade
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: "Produtos mais vendidos"
+                            }
+                        }
+                    });
                 }
             });
+
         }
     </script>
 @endsection
