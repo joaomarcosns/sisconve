@@ -68,12 +68,11 @@ class ProdutosController extends Controller
         }
 
         $produto = Produtos::find($id);
-        $categoria_id = $produto->categoria_id;
-        $categoria = Categoria::find($categoria_id);
-
+        $categoria = Produtos::find($id)->categoria()->where("id", "=", $produto->categoria_id)->get("nome_categoria");
+           
         $dados = [
             'nome' => $produto->nome_produto,
-            'categoria' => $categoria->nome_categoria
+            'categoria' => $categoria[0]->nome_categoria,
         ];
         return json_encode($dados);
         

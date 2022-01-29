@@ -15,11 +15,15 @@ class CreateItemVendaTable extends Migration
     {
         Schema::create('item_venda', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger("produto_id");
-            $table->unsignedInteger("venda_id");
+            $table->unsignedBigInteger("produto_id");
+            $table->unsignedBigInteger("venda_id");
             $table->decimal("valor_unitario", 10, 2);
             $table->integer("quantidade");
             $table->timestamps();
+
+            $table->foreign("produto_id")->references("id")->on("produtos");
+            $table->foreign("venda_id")->references("id")->on("venda");
+
         });
     }
 

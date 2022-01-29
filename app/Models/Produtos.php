@@ -24,4 +24,9 @@ class Produtos extends Model
         'quantidade',
         'ativo'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
 }
