@@ -55,7 +55,6 @@
             $.ajax({
                 type: "GET",
                 url: `./cliente/show/${id}`,
-                data: "data",
                 dataType: "json",
                 success: function(response) {
 

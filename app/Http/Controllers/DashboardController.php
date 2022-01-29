@@ -34,7 +34,9 @@ class DashboardController extends Controller
         GROUP BY iv.produto_id, p.id, p.nome_produto, p.preco_venda
         ");
 
-        return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos'));
+        $cardVenda = DB::table("venda")->where("created_at", "=", "CURDATE()")->count();
+
+        return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos', 'cardVenda'));
     }
 
     /**
@@ -169,4 +171,6 @@ class DashboardController extends Controller
 
         return json_encode(compact("nome", "quantidade", "cor"));
     }
+
+
 }

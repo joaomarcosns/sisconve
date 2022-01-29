@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="card-body">
                                     {{-- totalVendaDia' --}}
-                                    <strong>40</strong>
+                                    <strong>{{ $cardVenda }}</strong>
                                     <span>vendas</span>
                                 </div>
                             </div>
