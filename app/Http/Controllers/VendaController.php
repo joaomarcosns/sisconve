@@ -71,6 +71,11 @@ class VendaController extends Controller
 
         for ($i=0; $i < count($produtos); $i++) { 
             $produto = Produtos::find($produtos[$i]);
+
+            if ($produto->quantidade < $quantidades[$i]) {
+                return redirect()->route('compra.create')->with('error', 'Quantidade de produto insuficiente');
+            }
+
             $valorTotal += $produto->preco_venda * $quantidades[$i];
         }
 
