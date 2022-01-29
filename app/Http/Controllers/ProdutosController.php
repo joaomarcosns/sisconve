@@ -68,7 +68,8 @@ class ProdutosController extends Controller
         }
 
         $produto = Produtos::find($id);
-        $categoria = Categoria::find($produto->categoria_id);
+        $categoria_id = $produto->categoria_id;
+        $categoria = Categoria::find($categoria_id);
 
         $dados = [
             'nome' => $produto->nome_produto,

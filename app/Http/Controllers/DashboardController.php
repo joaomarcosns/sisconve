@@ -35,7 +35,6 @@ class DashboardController extends Controller
         ");
         $agora = date('Y-m-d');
         $cardVenda = DB::table("venda")->where('created_at','LIKE','%'.$agora.'%')->count();
-        // "created_at", "LIKE", "%CURDATE()%"
 
         return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos', 'cardVenda'));
     }
