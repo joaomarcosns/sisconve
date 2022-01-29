@@ -33,8 +33,9 @@ class DashboardController extends Controller
         INNER JOIN produtos p on p.id = iv.produto_id
         GROUP BY iv.produto_id, p.id, p.nome_produto, p.preco_venda
         ");
-
-        $cardVenda = DB::table("venda")->where("created_at", "=", "CURDATE()")->count();
+        $agora = date('Y-m-d');
+        $cardVenda = DB::table("venda")->where('created_at','LIKE','%'.$agora.'%')->count();
+        // "created_at", "LIKE", "%CURDATE()%"
 
         return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos', 'cardVenda'));
     }
