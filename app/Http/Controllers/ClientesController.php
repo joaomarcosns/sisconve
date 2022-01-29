@@ -98,7 +98,7 @@ class ClientesController extends Controller
             return redirect()->route('login.create');
         }
 
-        $clientes = DB::select('SELECT clientes.* FROM clientes WHERE clientes.id = ? AND clientes.ativo = 1', [$id]);
+        $clientes = DB::select('SELECT clientes.* FROM clientes WHERE clientes.id = ? AND clientes.ativo = true', [$id]);
         $enderecos = DB::select('SELECT endereco_clientes.* FROM endereco_clientes WHERE endereco_clientes.cliente_id = ?', [$id]);
         $contatos = DB::select('SELECT contatos_clientes.* FROM contatos_clientes WHERE contatos_clientes.cliente_id = ?', [$id]);
         $dados = [
