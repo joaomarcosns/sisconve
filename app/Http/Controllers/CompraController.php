@@ -75,6 +75,20 @@ class CompraController extends Controller
             return redirect()->route('compra.create')->with('error', 'Nenhum produto foi selecionado');
         } elseif (empty($fornecedor_id)) {
             return redirect()->route('compra.create')->with('error', 'Nenhum fornecedor foi selecionado');
+        } elseif (empty($forma_pagamento_id)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum metodo de pagamento foi selecionado');
+        } elseif (empty($parcela)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum numero de parcelas foi selecionado');
+        } elseif (empty($valor_unitario)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum valor unitario foi selecionado');
+        } elseif (empty($quantidade)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhuma quantidade foi selecionada');
+        }elseif (empty($ipi)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum valor de IPI foi selecionado');
+        }elseif (empty($icms)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum valor de ICMS foi selecionado');
+        }elseif (empty($frete)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum valor de frete foi selecionado');
         }
 
         for ($i = 0; $i < count($produtos); $i++) {

@@ -32,12 +32,12 @@
                             </div>
                             <div class="card" style="background-color: #00A507 !important;">
                                 <div class="title-card" style="background-color: #1C9821 !important;">
-                                    <span>Média de Lucro / dia</span>
+                                    <span>Total Recolhidos/ dia</span>
                                 </div>
                                 <div class="card-body">
                                     <span>R$</span>
                                     {{-- mediadeLucroDia' --}}
-                                    <strong>20</strong>
+                                    <strong>{{$cardRecolhidos}}</strong>
                                 </div>
                             </div>
                             <div class="card" style="background-color: #11858C !important;">

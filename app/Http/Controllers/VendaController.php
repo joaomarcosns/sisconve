@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Caixa;
 use App\Models\Cliente;
 use App\Models\FormaPagamento;
 use App\Models\ItemVenda;
@@ -66,6 +67,10 @@ class VendaController extends Controller
             return redirect()->route('compra.create')->with('error', 'Nenhum produto foi selecionado');
         } elseif (empty($cliente)) {
             return redirect()->route('compra.create')->with('error', 'Nenhum Cliente foi selecionado');
+        } elseif (empty($forma_pagamento)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum metodo de pagamento foi selecionado');
+        } elseif (empty($parcelas)) {
+            return redirect()->route('compra.create')->with('error', 'Nenhum numero de parcelas foi selecionado');
         }
 
 
@@ -113,6 +118,10 @@ class VendaController extends Controller
             $produto->quantidade -= $quantidades[$i];
             $produto->save();
         }
+
+        $caixa = Caixa::find(session('funcionario')->numero_caixa);
+        $caixa->valor_em_caixa += $valorTotal;
+        $caixa->save();
 
         return redirect()->route('venda.create')->with('success', 'Venda realizada com sucesso');
         
