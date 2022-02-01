@@ -48,12 +48,12 @@
                         @foreach ($caixas as $caixa)
                         <tr>
                             <td>{{$caixa->id}}</td>
-                            <td>{{$caixa->numero_caixa}}</td>
-                            <td>{{$caixa->valor_em_caixa}}</td>
+                            <td >{{$caixa->numero_caixa}}</td>
+                            <td class="a">{{$caixa->valor_em_caixa}}</td>
                             <td>{{$caixa->status ? "Ativo" : "Inatico"}}</td>
                             <td>
-                                <button title="Ver caixa" onclick="">
-                                    <img src="{{ asset("img/eye-icon.svg")}}" alt="Ver caixa">
+                                <button title="Ver caixa"  class="ver_caixa">
+                                    <img src="{{ asset("img/eye-icon.svg")}}" alt="Ver caixa" >
                                 </button>
                                 <button title="Editar caixa">
                                     <img src="{{ asset("img/pencil-icon.svg")}}" data-toggle="modal"
@@ -70,4 +70,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.ver_caixa').click(function (e) { 
+                e.preventDefault();
+                var id = $('.a').text();
+                console.log(id);
+            });
+        });
+    </script>
 @endsection
+

@@ -19,7 +19,7 @@ class CaixaController extends Controller
         if (!ValidarLogin::verificaSessao()) {
             return redirect()->route('login.create');
         }
-        $caixas = Caixa::all();
+        $caixas = Caixa::all()->where('status', '=', true);
         return view('caixa.index', compact('caixas'));
     }
 
@@ -60,7 +60,9 @@ class CaixaController extends Controller
      */
     public function show($id)
     {
-        //
+        $caixa = Caixa::find($id);
+
+        return json_encode($caixa);
     }
 
     /**

@@ -173,7 +173,10 @@
 
                         $('#btnSubmit').css("background-color", "#00AC4F");
                         $('#btnClose').css("background-color", "#CD0000");
-                        location.reload(true);
+                        
+                        setInterval('location.reload()', 7000);
+
+                        
                     },
                     error: function(response) {
                         const data = response.responseJSON;

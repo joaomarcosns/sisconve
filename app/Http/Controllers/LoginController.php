@@ -69,6 +69,7 @@ class LoginController extends Controller
         $email = trim($request->email);
         $senha = trim($request->senha);
         $funcionario = Funcionarios::where("email", $email)->first();
+        
         if ($funcionario && Hash::check($senha, $funcionario->senha)) {
             $funcionarioSession = DB::table('funcionarios as f')
             ->select('f.id', 'f.nome_funcionario', 'f.nivel_acesso', 'f.telefone', 

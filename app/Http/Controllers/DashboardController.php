@@ -34,9 +34,11 @@ class DashboardController extends Controller
         GROUP BY iv.produto_id, p.id, p.nome_produto, p.preco_venda
         ");
         $agora = date('Y-m-d');
-        $cardVenda = DB::table("venda")->where('created_at','LIKE','%'.$agora.'%')->count();
 
-        return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos', 'cardVenda'));
+        $cardVenda = DB::table("venda")->where('created_at','LIKE','%'.$agora.'%')->count();
+        $cardRecolhidos = DB::table("venda")->where('created_at','LIKE','%'.$agora.'%')->sum('valor_total');
+
+        return view('dashboard.index', compact('clientes', 'produtosAbaixoEstoque', 'produtoMaisVendidos', 'cardVenda', 'cardRecolhidos'));
     }
 
     /**

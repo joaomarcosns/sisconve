@@ -71,6 +71,7 @@
                         $('#cadastrar-caixa-modal').modal({
                             keyboard: false
                         })
+                        location.reload();
                     },
                     error: function (response) {
                         const data = response.responseJSON;
