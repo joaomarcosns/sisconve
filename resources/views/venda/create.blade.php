@@ -279,8 +279,8 @@
                         ${produtos[inputNomeProduto.value].nome}
                     </td>
                     <td>
-                        <input type="text" name="valor_unitario[]" value="${(produtos[inputNomeProduto.value].valor).toFixed(2)}" required style="display: none">
-                        R$ ${(produtos[inputNomeProduto.value].valor).toFixed(2)}
+                        <input type="text" name="valor_unitario[]" value="${(produtos[inputNomeProduto.value].valor))}" required style="display: none">
+                        R$ ${(produtos[inputNomeProduto.value].valor))}
                     </td>
                     <td>
                         <input type="text" id="quantidade-produto" name="quantidade_produto[]" value="${inputQuantProduto.value}" required style="display: none">
@@ -288,7 +288,7 @@
                     </td>
                     <td>
                         <input type="text" id="valor-total-produto" value="${(parseInt(inputQuantProduto.value)*produtos[inputNomeProduto.value].valor)}" required style="display: none">
-                        R$ ${(parseInt(inputQuantProduto.value)*produtos[inputNomeProduto.value].valor).toFixed(2)}
+                        R$ ${(parseInt(inputQuantProduto.value)*produtos[inputNomeProduto.value].valor))}
                     </td>
                     <td>
                         <button title="Remover item" onclick="removeRow(this)">
@@ -369,7 +369,7 @@
                 valorTotal += parseFloat(valor.value);
             });
 
-            $("#value-cart").html(valorTotal.toFixed(2));
+            $("#value-cart").html(valorTotal));
         }
 
         function removeRow(btn) {
