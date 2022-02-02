@@ -121,8 +121,7 @@ class CompraController extends Controller
             $pagamentoCompra->status = 'Pago';
         } else {
             $pagamentoCompra->valor_pago = 0.0;
-            $date = date('Y-m-d H:i:s');
-            $pagamentoCompra->data_pagamento = date('d/m/Y', strtotime("+2 days", strtotime($date)));;
+            $pagamentoCompra->data_pagamento = date('Y-m-d H:i:s');
         }
         $pagamentoCompra->save();
 
