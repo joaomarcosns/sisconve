@@ -175,7 +175,7 @@
                     $('#uf>input').prop('disabled', false);
                     $('#btnSubmit').css("background-color", "#00AC4F");
                     $('#btnClose').css("background-color", "#CD0000");
-                    location.reload(true);
+                    location.reload();
 
                 },
                 error: (response) => {

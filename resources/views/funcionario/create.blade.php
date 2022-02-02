@@ -134,7 +134,24 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        console.log(response);
+                        $('#btnSubmit').prop('disabled', false);
+                        $('#btnClose').prop('disabled', false);
+
+                        $('#nome_fantasia>input').prop('disabled', false);
+                        $('#cnpj>input').prop('disabled', false);
+                        $('#tipo>select').prop('disabled', false);
+                        $('#ddd>input').prop('disabled', false);
+                        $('#telefone>input').prop('disabled', false);
+                        $('#email>input').prop('disabled', false);
+                        $('#endereco>input').prop('disabled', false);
+                        $('#numero>input').prop('disabled', false);
+                        $('#cidade>input').prop('disabled', false);
+                        $('#uf>input').prop('disabled', false);
+
+                        $('#btnSubmit').css("background-color", "#00AC4F");
+                        $('#btnClose').css("background-color", "#CD0000");
+
+                        location.reload();
                     },
                     error: function(response) {
                         const data = response.responseJSON;

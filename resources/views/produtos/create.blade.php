@@ -95,6 +95,7 @@
                     $('#cadastrar-produto-modal').modal({
                         keyboard: false
                     })
+                    location.reload();
 
                 },
                 error: function(response) {

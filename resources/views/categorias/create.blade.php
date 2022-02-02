@@ -53,6 +53,7 @@
                 success: function(response) {
                     $('#nomecategoria>input').prop('disabled', false);
                     $('#submit').prop('disabled', false);
+                    location.reload();
                 },
                 error: function(response) {
                     const data = response.responseJSON;
