@@ -105,6 +105,7 @@ class VendaController extends Controller
             $pagamentoVenda->status = 'Pago';
             $pagamentoVenda->valor_pago = $valorTotal;
         } else {
+            $pagamentoVenda->valor_pago = 0;
             $pagamentoVenda->data_pagamento = date('Y-m-d', strtotime('+1 month'));
         }
         $pagamentoVenda->save();
