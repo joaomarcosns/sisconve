@@ -27,7 +27,11 @@ class VendaController extends Controller
             return redirect()->route('login.create');
         }
 
-        return view('venda.index');
+        $vendas = Venda::select('venda.*', 'clientes.nome as nome_cliente')
+            ->join('clientes', 'clientes.id', '=', 'venda.cliente_id')
+            ->get();
+
+        return view('venda.index', compact('vendas'));
     }
 
     /**
