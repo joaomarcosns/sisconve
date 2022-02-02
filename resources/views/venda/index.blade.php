@@ -35,12 +35,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($vendas as $venda)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>R$ </td>
-                            <td></td>
+                            <td>{{$venda->id}}</td>
+                            <td>{{$venda->nome_cliente}}</td>
+                            <td>{{$venda->parcela}}</td>
+                            <td>R$ {{$venda->valor_total}}</td>
+                            <td>{{date('d/m/Y', strtotime($venda->created_at))}}</td>
                             <td>
                                 <a title="Ver venda" href="#">
                                     <img src="{{ asset("img/eye-icon.svg")}}" alt="">
@@ -53,6 +54,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
