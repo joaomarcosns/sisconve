@@ -69,7 +69,7 @@
 ```bash
   cd web2-2021.1
 ```
-- Selecione a branch `Projeto1-1Unidade`
+- Selecione a branch `Projeto2-2Unidade`
 ```bash
   git checkout Projeto2-2Unidade 
 ```
